@@ -24,7 +24,7 @@ const pages = [
 ];
 
 function Navbar() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
   const [activeSection, setActiveSection] = useState("hero");
   const { scrollY } = useScroll();
 
@@ -36,7 +36,7 @@ function Navbar() {
   );
   const navbarHeight = useTransform(scrollY, [0, 100], ["80px", "70px"]);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 

@@ -1,41 +1,35 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { 
-  Box, 
-  Grid, 
-  TextField, 
-  Button, 
-  FormControl, 
-  InputLabel, 
+import { useState, useEffect } from "react";
+import {
+  Box,
+  Grid,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
   Slider,
   Typography,
   FormHelperText,
-  CircularProgress
-} from '@mui/material';
-import { Skill } from '@/lib/types';
-import { useTheme } from '@mui/material/styles';
+  CircularProgress,
+} from "@mui/material";
+import { Skill } from "@/lib/types";
+import { useTheme } from "@mui/material/styles";
 
-interface SkillFormProps {
-  skill: Skill | null;
-  onSave: (skill: Skill) => void;
-  loading: boolean;
-}
-
-export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
+export default function SkillForm({ skill, onSave, loading }) {
   const theme = useTheme();
 
-  const [formData, setFormData] = useState<Skill>({
-    id: '',
-    name: '',
+  const [formData, setFormData] = useState({
+    id: "",
+    name: "",
     level: 80,
-    description: '',
-    category: 'Frontend',
+    description: "",
+    category: "Frontend",
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (skill) {
@@ -49,15 +43,15 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
     }
   }, [skill]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name) {
-      setFormData(prev => ({ ...prev, [name]: value }));
-      
+      setFormData((prev) => ({ ...prev, [name]: value }));
+
       // Clear error for this field if it exists
       if (errors[name]) {
-        setErrors(prev => {
+        setErrors((prev) => {
           const newErrors = { ...prev };
           delete newErrors[name];
           return newErrors;
@@ -66,12 +60,12 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
     }
   };
 
-  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
-    setFormData(prev => ({ ...prev, level: newValue as number }));
-    
+  const handleSliderChange = (event, newValue) => {
+    setFormData((prev) => ({ ...prev, level: newValue }));
+
     // Clear error for this field if it exists
     if (errors.level) {
-      setErrors(prev => {
+      setErrors((prev) => {
         const newErrors = { ...prev };
         delete newErrors.level;
         return newErrors;
@@ -79,38 +73,45 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
     }
   };
 
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
-    
+  const validateForm = () => {
+    const newErrors = {};
+
     if (!formData.name.trim()) {
-      newErrors.name = 'Skill name is required';
+      newErrors.name = "Skill name is required";
     }
-    
+
     if (!formData.description.trim()) {
-      newErrors.description = 'Description is required';
+      newErrors.description = "Description is required";
     }
-    
+
     if (!formData.category) {
-      newErrors.category = 'Category is required';
+      newErrors.category = "Category is required";
     }
-    
+
     if (formData.level < 0 || formData.level > 100) {
-      newErrors.level = 'Level must be between 0 and 100';
+      newErrors.level = "Level must be between 0 and 100";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       onSave(formData);
     }
   };
 
-  const categories = ['Frontend', 'Backend', 'DevOps & Tools', 'Design', 'Mobile', 'Other'];
+  const categories = [
+    "Frontend",
+    "Backend",
+    "DevOps & Tools",
+    "Design",
+    "Mobile",
+    "Other",
+  ];
 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate>
@@ -128,7 +129,7 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
             disabled={loading}
           />
         </Grid>
-        
+
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth error={!!errors.category} disabled={loading}>
             <InputLabel>Category</InputLabel>
@@ -144,10 +145,12 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
                 </MenuItem>
               ))}
             </Select>
-            {errors.category && <FormHelperText>{errors.category}</FormHelperText>}
+            {errors.category && (
+              <FormHelperText>{errors.category}</FormHelperText>
+            )}
           </FormControl>
         </Grid>
-        
+
         <Grid item xs={12}>
           <TextField
             required
@@ -163,11 +166,9 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
             disabled={loading}
           />
         </Grid>
-        
+
         <Grid item xs={12}>
-          <Typography gutterBottom>
-            Skill Level: {formData.level}%
-          </Typography>
+          <Typography gutterBottom>Skill Level: {formData.level}%</Typography>
           <Slider
             value={formData.level}
             onChange={handleSliderChange}
@@ -180,8 +181,8 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
             disabled={loading}
             sx={{
               color: theme.palette.primary.main,
-              '& .MuiSlider-thumb': {
-                '&:hover, &.Mui-focusVisible': {
+              "& .MuiSlider-thumb": {
+                "&:hover, &.Mui-focusVisible": {
                   boxShadow: `0px 0px 0px 8px ${theme.palette.primary.main}20`,
                 },
               },
@@ -191,8 +192,12 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
             <FormHelperText error>{errors.level}</FormHelperText>
           )}
         </Grid>
-        
-        <Grid item xs={12} sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+
+        <Grid
+          item
+          xs={12}
+          sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}
+        >
           <Button
             type="submit"
             variant="contained"
@@ -202,8 +207,10 @@ export default function SkillForm({ skill, onSave, loading }: SkillFormProps) {
           >
             {loading ? (
               <CircularProgress size={24} color="inherit" />
+            ) : formData.id ? (
+              "Update Skill"
             ) : (
-              formData.id ? 'Update Skill' : 'Create Skill'
+              "Create Skill"
             )}
           </Button>
         </Grid>

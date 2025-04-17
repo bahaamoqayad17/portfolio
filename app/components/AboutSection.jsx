@@ -21,7 +21,7 @@ import { createGradientBackground } from "../theme";
 
 export default function AboutSection() {
   const theme = useTheme();
-  const [about, setAbout] = useState<any>({
+  const [about, setAbout] = useState({
     name: "Bahaa El Moqayad",
     avatar: "/bahaa.jpg",
     title: "Full Stack JavaScript Developer",
@@ -101,7 +101,7 @@ export default function AboutSection() {
   //   fetchAbout();
   // }, []);
 
-  const renderIcon = (iconName: string) => {
+  const renderIcon = (iconName) => {
     switch (iconName) {
       case "web":
         return <WebIcon fontSize="large" />;
@@ -238,7 +238,7 @@ export default function AboutSection() {
 
             <Grid component="div" item size={{ xs: 12, md: 5 }}>
               <Grid container spacing={3}>
-                {about.categories.map((category: any, index: number) => (
+                {about.categories.map((category, index) => (
                   <Grid component="div" item xs={12} sm={6} md={6} key={index}>
                     <AnimatedCard delay={index * 0.2}>
                       <Box

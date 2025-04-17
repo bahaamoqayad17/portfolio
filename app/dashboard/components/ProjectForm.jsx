@@ -1,44 +1,38 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { 
-  Box, 
-  Grid, 
-  TextField, 
-  Button, 
-  FormControl, 
-  InputLabel, 
+import { useState, useEffect } from "react";
+import {
+  Box,
+  Grid,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
   Chip,
   OutlinedInput,
   FormHelperText,
-  CircularProgress
-} from '@mui/material';
-import { Project } from '@/lib/types';
-import { useTheme } from '@mui/material/styles';
+  CircularProgress,
+} from "@mui/material";
+import { Project } from "@/lib/types";
+import { useTheme } from "@mui/material/styles";
 
-interface ProjectFormProps {
-  project: Project | null;
-  onSave: (project: Project) => void;
-  loading: boolean;
-}
-
-export default function ProjectForm({ project, onSave, loading }: ProjectFormProps) {
+export default function ProjectForm({ project, onSave, loading }) {
   const theme = useTheme();
 
-  const [formData, setFormData] = useState<Project>({
-    id: '',
-    title: '',
-    description: '',
-    image: '/assets/project-placeholder.svg',
+  const [formData, setFormData] = useState({
+    id: "",
+    title: "",
+    description: "",
+    image: "/assets/project-placeholder.svg",
     technologies: [],
-    category: 'Frontend',
-    demoUrl: '',
-    githubUrl: '',
+    category: "Frontend",
+    demoUrl: "",
+    githubUrl: "",
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (project) {
@@ -49,21 +43,21 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
         image: project.image,
         technologies: project.technologies,
         category: project.category,
-        demoUrl: project.demoUrl || '',
-        githubUrl: project.githubUrl || '',
+        demoUrl: project.demoUrl || "",
+        githubUrl: project.githubUrl || "",
       });
     }
   }, [project]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name) {
-      setFormData(prev => ({ ...prev, [name]: value }));
-      
+      setFormData((prev) => ({ ...prev, [name]: value }));
+
       // Clear error for this field if it exists
       if (errors[name]) {
-        setErrors(prev => {
+        setErrors((prev) => {
           const newErrors = { ...prev };
           delete newErrors[name];
           return newErrors;
@@ -72,13 +66,13 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
     }
   };
 
-  const handleTechChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    const value = event.target.value as string[];
-    setFormData(prev => ({ ...prev, technologies: value }));
-    
+  const handleTechChange = (event) => {
+    const value = event.target.value;
+    setFormData((prev) => ({ ...prev, technologies: value }));
+
     // Clear error for this field if it exists
     if (errors.technologies) {
-      setErrors(prev => {
+      setErrors((prev) => {
         const newErrors = { ...prev };
         delete newErrors.technologies;
         return newErrors;
@@ -86,38 +80,38 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
     }
   };
 
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
-    
+  const validateForm = () => {
+    const newErrors = {};
+
     if (!formData.title.trim()) {
-      newErrors.title = 'Title is required';
+      newErrors.title = "Title is required";
     }
-    
+
     if (!formData.description.trim()) {
-      newErrors.description = 'Description is required';
+      newErrors.description = "Description is required";
     }
-    
+
     if (formData.technologies.length === 0) {
-      newErrors.technologies = 'At least one technology is required';
+      newErrors.technologies = "At least one technology is required";
     }
-    
+
     if (!formData.category) {
-      newErrors.category = 'Category is required';
+      newErrors.category = "Category is required";
     }
-    
+
     if (formData.demoUrl && !isValidUrl(formData.demoUrl)) {
-      newErrors.demoUrl = 'Please enter a valid URL';
+      newErrors.demoUrl = "Please enter a valid URL";
     }
-    
+
     if (formData.githubUrl && !isValidUrl(formData.githubUrl)) {
-      newErrors.githubUrl = 'Please enter a valid URL';
+      newErrors.githubUrl = "Please enter a valid URL";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const isValidUrl = (url: string): boolean => {
+  const isValidUrl = (url) => {
     if (!url) return true; // Empty URL is valid (not required)
     try {
       new URL(url);
@@ -127,9 +121,9 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       onSave(formData);
     }
@@ -137,21 +131,59 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
 
   const availableTechnologies = [
     // Frontend
-    'React', 'Next.js', 'Vue.js', 'Angular', 'TypeScript', 'JavaScript', 
-    'HTML/CSS', 'Tailwind CSS', 'Material UI', 'Chakra UI', 'Framer Motion',
+    "React",
+    "Next.js",
+    "Vue.js",
+    "Angular",
+    "TypeScript",
+    "JavaScript",
+    "HTML/CSS",
+    "Tailwind CSS",
+    "Material UI",
+    "Chakra UI",
+    "Framer Motion",
     // Backend
-    'Node.js', 'Express', 'Django', 'Flask', 'Spring Boot', 'Nest.js',
+    "Node.js",
+    "Express",
+    "Django",
+    "Flask",
+    "Spring Boot",
+    "Nest.js",
     // Databases
-    'MongoDB', 'PostgreSQL', 'MySQL', 'Firebase', 'Supabase', 'Redis',
+    "MongoDB",
+    "PostgreSQL",
+    "MySQL",
+    "Firebase",
+    "Supabase",
+    "Redis",
     // DevOps & Tools
-    'Docker', 'Kubernetes', 'AWS', 'GitHub Actions', 'GitLab CI', 'Jest', 'Cypress',
+    "Docker",
+    "Kubernetes",
+    "AWS",
+    "GitHub Actions",
+    "GitLab CI",
+    "Jest",
+    "Cypress",
     // Mobile
-    'React Native', 'Flutter', 'Swift', 'Kotlin',
+    "React Native",
+    "Flutter",
+    "Swift",
+    "Kotlin",
     // Other
-    'GraphQL', 'REST API', 'WebSockets', 'Electron'
+    "GraphQL",
+    "REST API",
+    "WebSockets",
+    "Electron",
   ];
 
-  const categories = ['Frontend', 'Backend', 'Full Stack', 'Mobile', 'DevOps', 'Other'];
+  const categories = [
+    "Frontend",
+    "Backend",
+    "Full Stack",
+    "Mobile",
+    "DevOps",
+    "Other",
+  ];
 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate>
@@ -169,7 +201,7 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
             disabled={loading}
           />
         </Grid>
-        
+
         <Grid item xs={12}>
           <TextField
             required
@@ -185,7 +217,7 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
             disabled={loading}
           />
         </Grid>
-        
+
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth error={!!errors.category} disabled={loading}>
             <InputLabel>Category</InputLabel>
@@ -201,12 +233,18 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
                 </MenuItem>
               ))}
             </Select>
-            {errors.category && <FormHelperText>{errors.category}</FormHelperText>}
+            {errors.category && (
+              <FormHelperText>{errors.category}</FormHelperText>
+            )}
           </FormControl>
         </Grid>
-        
+
         <Grid item xs={12} sm={6}>
-          <FormControl fullWidth error={!!errors.technologies} disabled={loading}>
+          <FormControl
+            fullWidth
+            error={!!errors.technologies}
+            disabled={loading}
+          >
             <InputLabel>Technologies</InputLabel>
             <Select
               multiple
@@ -214,26 +252,25 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
               onChange={handleTechChange}
               input={<OutlinedInput label="Technologies" />}
               renderValue={(selected) => (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {(selected as string[]).map((value) => (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((value) => (
                     <Chip key={value} label={value} />
                   ))}
                 </Box>
               )}
             >
               {availableTechnologies.map((tech) => (
-                <MenuItem
-                  key={tech}
-                  value={tech}
-                >
+                <MenuItem key={tech} value={tech}>
                   {tech}
                 </MenuItem>
               ))}
             </Select>
-            {errors.technologies && <FormHelperText>{errors.technologies}</FormHelperText>}
+            {errors.technologies && (
+              <FormHelperText>{errors.technologies}</FormHelperText>
+            )}
           </FormControl>
         </Grid>
-        
+
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
@@ -247,7 +284,7 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
             disabled={loading}
           />
         </Grid>
-        
+
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
@@ -256,13 +293,19 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
             value={formData.githubUrl}
             onChange={handleChange}
             error={!!errors.githubUrl}
-            helperText={errors.githubUrl || "Optional: URL to the GitHub repository"}
+            helperText={
+              errors.githubUrl || "Optional: URL to the GitHub repository"
+            }
             placeholder="https://github.com/username/repo"
             disabled={loading}
           />
         </Grid>
-        
-        <Grid item xs={12} sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+
+        <Grid
+          item
+          xs={12}
+          sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}
+        >
           <Button
             type="submit"
             variant="contained"
@@ -272,8 +315,10 @@ export default function ProjectForm({ project, onSave, loading }: ProjectFormPro
           >
             {loading ? (
               <CircularProgress size={24} color="inherit" />
+            ) : formData.id ? (
+              "Update Project"
             ) : (
-              formData.id ? 'Update Project' : 'Create Project'
+              "Create Project"
             )}
           </Button>
         </Grid>

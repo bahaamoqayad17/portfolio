@@ -16,7 +16,7 @@ import Link from "next/link";
 export default function HeroSection() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef(null);
 
   // Wave animation effect
   useEffect(() => {

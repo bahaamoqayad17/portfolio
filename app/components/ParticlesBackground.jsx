@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useCallback } from 'react';
-import Particles from 'react-particles';
-import { Engine } from 'tsparticles-engine';
-import { loadSlim } from 'tsparticles-slim';
-import { useTheme } from '@mui/material';
+import { useCallback } from "react";
+import Particles from "react-particles";
+import { Engine } from "tsparticles-engine";
+import { loadSlim } from "tsparticles-slim";
+import { useTheme } from "@mui/material";
 
 export default function ParticlesBackground() {
   const theme = useTheme();
-  
-  const particlesInit = useCallback(async (engine: Engine) => {
+
+  const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
   }, []);
 
@@ -20,7 +20,7 @@ export default function ParticlesBackground() {
       options={{
         background: {
           color: {
-            value: 'transparent',
+            value: "transparent",
           },
         },
         fpsLimit: 60,
@@ -28,16 +28,16 @@ export default function ParticlesBackground() {
           events: {
             onClick: {
               enable: true,
-              mode: 'push',
+              mode: "push",
             },
             onHover: {
               enable: true,
-              mode: 'repulse',
+              mode: "repulse",
               parallax: {
                 enable: true,
                 force: 60,
-                smooth: 10
-              }
+                smooth: 10,
+              },
             },
             resize: true,
           },
@@ -66,10 +66,10 @@ export default function ParticlesBackground() {
             enable: true,
           },
           move: {
-            direction: 'none',
+            direction: "none",
             enable: true,
             outModes: {
-              default: 'bounce',
+              default: "bounce",
             },
             random: true,
             speed: 1,
@@ -89,10 +89,10 @@ export default function ParticlesBackground() {
               speed: 0.5,
               minimumValue: 0.1,
               sync: false,
-            }
+            },
           },
           shape: {
-            type: 'circle',
+            type: "circle",
           },
           size: {
             value: { min: 1, max: 3 },
@@ -101,17 +101,17 @@ export default function ParticlesBackground() {
               speed: 2,
               minimumValue: 0.1,
               sync: false,
-            }
+            },
           },
         },
         detectRetina: true,
       }}
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
         zIndex: -1,
       }}
     />

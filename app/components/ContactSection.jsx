@@ -23,42 +23,27 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import { useTheme } from "@mui/material/styles";
 import { createGradientBackground } from "../theme";
 
-interface FormState {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-interface AlertState {
-  open: boolean;
-  message: string;
-  severity: AlertColor;
-}
-
 export default function ContactSection() {
   const theme = useTheme();
-  const [formData, setFormData] = useState<FormState>({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState<AlertState>({
+  const [alert, setAlert] = useState({
     open: false,
     message: "",
     severity: "success",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 

@@ -15,22 +15,9 @@ import AnimatedCard from "./AnimatedCard";
 import { useTheme } from "@mui/material/styles";
 import { createGradientBackground } from "../theme";
 
-// Types for skills
-interface Skill {
-  name: string;
-  level: number;
-  description: string;
-  category: string;
-}
-
-interface SkillCategory {
-  category: string;
-  skills: Skill[];
-}
-
 export default function SkillsSection() {
   const theme = useTheme();
-  const [skillCategories, setSkillCategories] = useState<SkillCategory[]>([
+  const [skillCategories, setSkillCategories] = useState([
     {
       category: "Frontend",
       skills: [

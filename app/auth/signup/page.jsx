@@ -27,7 +27,7 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -75,7 +75,7 @@ export default function SignupPage() {
       } else {
         router.push("/dashboard");
       }
-    } catch (error: any) {
+    } catch (error) {
       setError(error.message || "An error occurred during registration");
     } finally {
       setLoading(false);
@@ -98,6 +98,7 @@ export default function SignupPage() {
       >
         <Grid
           item
+          xs={12}
           md={6}
           sx={{
             height: "100%",
@@ -233,6 +234,7 @@ export default function SignupPage() {
 
         <Grid
           item
+          xs={12}
           md={6}
           sx={{
             height: "100%",

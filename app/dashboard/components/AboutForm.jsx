@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { 
-  Box, 
-  Grid, 
-  TextField, 
-  Button, 
-  FormControl, 
-  InputLabel, 
+import { useState, useEffect } from "react";
+import {
+  Box,
+  Grid,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
   Typography,
@@ -18,37 +18,30 @@ import {
   CardContent,
   CardActions,
   Paper,
-  Tooltip
-} from '@mui/material';
-import { 
+  Tooltip,
+} from "@mui/material";
+import {
   Add as AddIcon,
   Delete as DeleteIcon,
-  Save as SaveIcon
-} from '@mui/icons-material';
-import { AboutInfo, AboutCategory } from '@/lib/types';
-import { useTheme } from '@mui/material/styles';
+  Save as SaveIcon,
+} from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
 
-interface AboutFormProps {
-  aboutInfo: AboutInfo | null;
-  onSave: (aboutInfo: AboutInfo) => void;
-  loading: boolean;
-}
-
-export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps) {
+export default function AboutForm({ aboutInfo, onSave, loading }) {
   const theme = useTheme();
 
-  const [formData, setFormData] = useState<AboutInfo>({
-    name: '',
-    title: '',
-    bio: '',
-    experience: '',
-    location: '',
-    education: '',
-    categories: []
+  const [formData, setFormData] = useState({
+    name: "",
+    title: "",
+    bio: "",
+    experience: "",
+    location: "",
+    education: "",
+    categories: [],
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [categoryErrors, setCategoryErrors] = useState<Record<string, Record<string, string>>>({});
+  const [errors, setErrors] = useState({});
+  const [categoryErrors, setCategoryErrors] = useState({});
 
   useEffect(() => {
     if (aboutInfo) {
@@ -59,20 +52,20 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
         experience: aboutInfo.experience,
         location: aboutInfo.location,
         education: aboutInfo.education,
-        categories: aboutInfo.categories.map(cat => ({ ...cat }))
+        categories: aboutInfo.categories.map((cat) => ({ ...cat })),
       });
     }
   }, [aboutInfo]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name) {
-      setFormData(prev => ({ ...prev, [name]: value }));
-      
+      setFormData((prev) => ({ ...prev, [name]: value }));
+
       // Clear error for this field if it exists
       if (errors[name]) {
-        setErrors(prev => {
+        setErrors((prev) => {
           const newErrors = { ...prev };
           delete newErrors[name];
           return newErrors;
@@ -81,21 +74,21 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
     }
   };
 
-  const handleCategoryChange = (index: number, field: keyof AboutCategory, value: string) => {
+  const handleCategoryChange = (index, field, value) => {
     const updatedCategories = [...formData.categories];
     updatedCategories[index] = {
       ...updatedCategories[index],
-      [field]: value
+      [field]: value,
     };
-    
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      categories: updatedCategories
+      categories: updatedCategories,
     }));
-    
+
     // Clear error for this field if it exists
     if (categoryErrors[index]?.[field]) {
-      setCategoryErrors(prev => {
+      setCategoryErrors((prev) => {
         const newErrors = { ...prev };
         if (newErrors[index]) {
           delete newErrors[index][field];
@@ -109,31 +102,31 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
   };
 
   const addCategory = () => {
-    const newCategory: AboutCategory = {
+    const newCategory = {
       id: Date.now().toString(), // Use timestamp as temporary ID
-      title: '',
-      description: '',
-      icon: 'code'
+      title: "",
+      description: "",
+      icon: "code",
     };
-    
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      categories: [...prev.categories, newCategory]
+      categories: [...prev.categories, newCategory],
     }));
   };
 
-  const removeCategory = (index: number) => {
+  const removeCategory = (index) => {
     const updatedCategories = [...formData.categories];
     updatedCategories.splice(index, 1);
-    
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      categories: updatedCategories
+      categories: updatedCategories,
     }));
-    
+
     // Remove any errors for this category
     if (categoryErrors[index]) {
-      setCategoryErrors(prev => {
+      setCategoryErrors((prev) => {
         const newErrors = { ...prev };
         delete newErrors[index];
         return newErrors;
@@ -141,85 +134,95 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
     }
   };
 
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
-    const newCategoryErrors: Record<string, Record<string, string>> = {};
-    
+  const validateForm = () => {
+    const newErrors = {};
+    const newCategoryErrors = {};
+
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = "Name is required";
     }
-    
+
     if (!formData.title.trim()) {
-      newErrors.title = 'Title is required';
+      newErrors.title = "Title is required";
     }
-    
+
     if (!formData.bio.trim()) {
-      newErrors.bio = 'Bio is required';
+      newErrors.bio = "Bio is required";
     }
-    
+
     if (!formData.experience.trim()) {
-      newErrors.experience = 'Experience is required';
+      newErrors.experience = "Experience is required";
     }
-    
+
     if (!formData.location.trim()) {
-      newErrors.location = 'Location is required';
+      newErrors.location = "Location is required";
     }
-    
+
     if (!formData.education.trim()) {
-      newErrors.education = 'Education is required';
+      newErrors.education = "Education is required";
     }
-    
+
     // Validate categories
     formData.categories.forEach((category, index) => {
-      const categoryErrorObj: Record<string, string> = {};
-      
+      const categoryErrorObj = {};
+
       if (!category.title.trim()) {
-        categoryErrorObj.title = 'Title is required';
+        categoryErrorObj.title = "Title is required";
       }
-      
+
       if (!category.description.trim()) {
-        categoryErrorObj.description = 'Description is required';
+        categoryErrorObj.description = "Description is required";
       }
-      
+
       if (!category.icon) {
-        categoryErrorObj.icon = 'Icon is required';
+        categoryErrorObj.icon = "Icon is required";
       }
-      
+
       if (Object.keys(categoryErrorObj).length > 0) {
         newCategoryErrors[index] = categoryErrorObj;
       }
     });
-    
+
     setErrors(newErrors);
     setCategoryErrors(newCategoryErrors);
-    
-    return Object.keys(newErrors).length === 0 && Object.keys(newCategoryErrors).length === 0;
+
+    return (
+      Object.keys(newErrors).length === 0 &&
+      Object.keys(newCategoryErrors).length === 0
+    );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       onSave(formData);
     }
   };
 
   const icons = [
-    { value: 'code', label: 'Code' },
-    { value: 'web', label: 'Website' },
-    { value: 'server', label: 'Server' },
-    { value: 'design', label: 'Design' },
-    { value: 'mobile', label: 'Mobile' },
-    { value: 'database', label: 'Database' }
+    { value: "code", label: "Code" },
+    { value: "web", label: "Website" },
+    { value: "server", label: "Server" },
+    { value: "design", label: "Design" },
+    { value: "mobile", label: "Mobile" },
+    { value: "database", label: "Database" },
   ];
 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate>
-      <Paper sx={{ p: 3, mb: 4, bgcolor: 'rgba(30, 30, 30, 0.6)', borderRadius: '12px' }}>
+      <Paper
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "rgba(30, 30, 30, 0.6)",
+          borderRadius: "12px",
+        }}
+      >
         <Typography variant="h6" gutterBottom fontWeight="bold">
           Personal Information
         </Typography>
-        
+
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -234,7 +237,7 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
               disabled={loading}
             />
           </Grid>
-          
+
           <Grid item xs={12} sm={6}>
             <TextField
               required
@@ -249,7 +252,7 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
               placeholder="e.g., Full Stack JavaScript Developer"
             />
           </Grid>
-          
+
           <Grid item xs={12}>
             <TextField
               required
@@ -265,7 +268,7 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
               disabled={loading}
             />
           </Grid>
-          
+
           <Grid item xs={12} sm={4}>
             <TextField
               required
@@ -280,7 +283,7 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
               placeholder="e.g., 5+ years"
             />
           </Grid>
-          
+
           <Grid item xs={12} sm={4}>
             <TextField
               required
@@ -295,7 +298,7 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
               placeholder="e.g., San Francisco, CA"
             />
           </Grid>
-          
+
           <Grid item xs={12} sm={4}>
             <TextField
               required
@@ -312,9 +315,23 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
           </Grid>
         </Grid>
       </Paper>
-      
-      <Paper sx={{ p: 3, mb: 4, bgcolor: 'rgba(30, 30, 30, 0.6)', borderRadius: '12px' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+
+      <Paper
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "rgba(30, 30, 30, 0.6)",
+          borderRadius: "12px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 3,
+          }}
+        >
           <Typography variant="h6" fontWeight="bold">
             Expertise Categories
           </Typography>
@@ -327,16 +344,18 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
             Add Category
           </Button>
         </Box>
-        
+
         <Grid container spacing={3}>
           {formData.categories.map((category, index) => (
             <Grid item xs={12} md={6} key={category.id || index}>
-              <Card sx={{ 
-                bgcolor: 'rgba(18, 18, 18, 0.5)',
-                borderRadius: '12px',
-                position: 'relative',
-                overflow: 'visible'
-              }}>
+              <Card
+                sx={{
+                  bgcolor: "rgba(18, 18, 18, 0.5)",
+                  borderRadius: "12px",
+                  position: "relative",
+                  overflow: "visible",
+                }}
+              >
                 <Tooltip title="Remove category" placement="top">
                   <IconButton
                     size="small"
@@ -344,19 +363,19 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
                     onClick={() => removeCategory(index)}
                     disabled={loading}
                     sx={{
-                      position: 'absolute',
+                      position: "absolute",
                       top: -12,
                       right: -12,
-                      bgcolor: 'background.paper',
-                      '&:hover': {
-                        bgcolor: 'error.dark'
-                      }
+                      bgcolor: "background.paper",
+                      "&:hover": {
+                        bgcolor: "error.dark",
+                      },
                     }}
                   >
                     <DeleteIcon fontSize="small" />
                   </IconButton>
                 </Tooltip>
-                
+
                 <CardContent>
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -365,21 +384,29 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
                         fullWidth
                         label="Title"
                         value={category.title}
-                        onChange={(e) => handleCategoryChange(index, 'title', e.target.value)}
+                        onChange={(e) =>
+                          handleCategoryChange(index, "title", e.target.value)
+                        }
                         error={!!categoryErrors[index]?.title}
                         helperText={categoryErrors[index]?.title}
                         disabled={loading}
                         placeholder="e.g., Frontend Development"
                       />
                     </Grid>
-                    
+
                     <Grid item xs={12}>
                       <TextField
                         required
                         fullWidth
                         label="Description"
                         value={category.description}
-                        onChange={(e) => handleCategoryChange(index, 'description', e.target.value)}
+                        onChange={(e) =>
+                          handleCategoryChange(
+                            index,
+                            "description",
+                            e.target.value
+                          )
+                        }
                         error={!!categoryErrors[index]?.description}
                         helperText={categoryErrors[index]?.description}
                         multiline
@@ -387,13 +414,19 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
                         disabled={loading}
                       />
                     </Grid>
-                    
+
                     <Grid item xs={12}>
-                      <FormControl fullWidth error={!!categoryErrors[index]?.icon} disabled={loading}>
+                      <FormControl
+                        fullWidth
+                        error={!!categoryErrors[index]?.icon}
+                        disabled={loading}
+                      >
                         <InputLabel>Icon</InputLabel>
                         <Select
                           value={category.icon}
-                          onChange={(e) => handleCategoryChange(index, 'icon', e.target.value as string)}
+                          onChange={(e) =>
+                            handleCategoryChange(index, "icon", e.target.value)
+                          }
                           label="Icon"
                         >
                           {icons.map((icon) => (
@@ -414,15 +447,17 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
               </Card>
             </Grid>
           ))}
-          
+
           {formData.categories.length === 0 && (
             <Grid item xs={12}>
-              <Box sx={{ 
-                textAlign: 'center', 
-                py: 4,
-                border: '1px dashed rgba(255, 255, 255, 0.2)',
-                borderRadius: '8px'
-              }}>
+              <Box
+                sx={{
+                  textAlign: "center",
+                  py: 4,
+                  border: "1px dashed rgba(255, 255, 255, 0.2)",
+                  borderRadius: "8px",
+                }}
+              >
                 <Typography variant="body1" color="text.secondary" gutterBottom>
                   No expertise categories added yet.
                 </Typography>
@@ -440,8 +475,8 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
           )}
         </Grid>
       </Paper>
-      
-      <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
+
+      <Box sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}>
         <Button
           type="submit"
           variant="contained"
@@ -453,7 +488,7 @@ export default function AboutForm({ aboutInfo, onSave, loading }: AboutFormProps
           {loading ? (
             <CircularProgress size={24} color="inherit" />
           ) : (
-            'Save Information'
+            "Save Information"
           )}
         </Button>
       </Box>

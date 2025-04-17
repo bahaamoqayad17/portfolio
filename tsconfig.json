@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/auth/signup/page.jsx", "app/components/AboutSection.jsx", "app/components/AnimatedCard.jsx", "app/components/AnimatedTitle.jsx", "app/components/ContactSection.jsx", "app/components/Footer.jsx", "app/components/GradientText.jsx", "app/components/HeroSection.jsx", "app/components/Navbar.jsx", "app/components/ParticlesBackground.jsx", "app/components/ProjectsSection.jsx", "app/components/SkillsSection.jsx", "app/dashboard/page.jsx", "app/dashboard/layout.jsx", "app/dashboard/skills/page.jsx", "app/dashboard/projects/page.jsx", "app/dashboard/contact/page.jsx", "app/dashboard/components/SkillForm.jsx", "app/dashboard/components/Sidebar.jsx", "app/dashboard/components/ProjectForm.jsx", "app/dashboard/components/DashboardHeader.jsx", "app/dashboard/components/AboutForm.jsx", "app/dashboard/about/page.jsx"],
   "exclude": ["node_modules"]
 }

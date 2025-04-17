@@ -23,21 +23,9 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { createGradientBackground } from "../theme";
 
-// Types for projects
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  demoUrl?: string;
-  githubUrl?: string;
-  category: string;
-}
-
 export default function ProjectsSection() {
   const theme = useTheme();
-  const [projects, setProjects] = useState<Project[]>([
+  const [projects, setProjects] = useState([
     {
       id: "1",
       title: "E-Commerce Platform",
@@ -111,7 +99,7 @@ export default function ProjectsSection() {
     },
   ]);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   // useEffect(() => {
@@ -206,10 +194,7 @@ export default function ProjectsSection() {
   //   fetchProjects();
   // }, []);
 
-  const handleCategoryChange = (
-    event: React.SyntheticEvent,
-    newCategory: string
-  ) => {
+  const handleCategoryChange = (event, newCategory) => {
     setSelectedCategory(newCategory);
   };
 

@@ -1,45 +1,39 @@
-'use client';
+"use client";
 
-import { 
-  AppBar, 
-  Box, 
-  IconButton, 
-  Toolbar, 
-  Typography, 
-  Badge, 
-  Avatar, 
-  Menu, 
-  MenuItem, 
-  useTheme 
-} from '@mui/material';
-import { 
-  Menu as MenuIcon, 
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Toolbar,
+  Typography,
+  Badge,
+  Avatar,
+  Menu,
+  MenuItem,
+  useTheme,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
   Notifications as NotificationsIcon,
   Person as PersonIcon,
   Settings as SettingsIcon,
-  Logout as LogoutIcon
-} from '@mui/icons-material';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { createGradientBackground } from '@/app/theme';
-
-interface DashboardHeaderProps {
-  isSidebarOpen: boolean;
-  toggleSidebar: () => void;
-  title: string;
-}
+  Logout as LogoutIcon,
+} from "@mui/icons-material";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { createGradientBackground } from "@/app/theme";
 
 export default function DashboardHeader({
   isSidebarOpen,
   toggleSidebar,
-  title
-}: DashboardHeaderProps) {
+  title,
+}) {
   const theme = useTheme();
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -48,30 +42,30 @@ export default function DashboardHeader({
   };
 
   const handleLogout = () => {
-    router.push('/');
+    router.push("/");
     handleMenuClose();
   };
 
   const handleGoToSettings = () => {
-    router.push('/dashboard/settings');
+    router.push("/dashboard/settings");
     handleMenuClose();
   };
 
   const handleGoToProfile = () => {
-    router.push('/dashboard/profile');
+    router.push("/dashboard/profile");
     handleMenuClose();
   };
 
   const isMenuOpen = Boolean(anchorEl);
 
   return (
-    <AppBar 
-      position="sticky" 
+    <AppBar
+      position="sticky"
       elevation={0}
-      sx={{ 
-        background: 'rgba(20, 20, 20, 0.8)',
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+      sx={{
+        background: "rgba(20, 20, 20, 0.8)",
+        backdropFilter: "blur(10px)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
     >
@@ -81,7 +75,7 @@ export default function DashboardHeader({
           aria-label="open drawer"
           edge="start"
           onClick={toggleSidebar}
-          sx={{ mr: 2, display: { sm: 'none' } }}
+          sx={{ mr: 2, display: { sm: "none" } }}
         >
           <MenuIcon />
         </IconButton>
@@ -89,12 +83,12 @@ export default function DashboardHeader({
           variant="h6"
           noWrap
           component="div"
-          sx={{ 
+          sx={{
             flexGrow: 1,
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
             fontWeight: 600,
-            position: 'relative'
+            position: "relative",
           }}
         >
           <motion.div
@@ -106,24 +100,24 @@ export default function DashboardHeader({
             {title}
           </motion.div>
         </Typography>
-        
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton 
-            size="large" 
-            aria-label="show new notifications" 
+
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <IconButton
+            size="large"
+            aria-label="show new notifications"
             color="inherit"
-            sx={{ 
+            sx={{
               mr: 2,
-              '&:hover': {
-                background: 'rgba(255, 255, 255, 0.05)'
-              } 
+              "&:hover": {
+                background: "rgba(255, 255, 255, 0.05)",
+              },
             }}
           >
             <Badge badgeContent={3} color="error">
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          
+
           <IconButton
             size="large"
             edge="end"
@@ -131,21 +125,21 @@ export default function DashboardHeader({
             aria-haspopup="true"
             onClick={handleProfileMenuOpen}
             color="inherit"
-            sx={{ 
+            sx={{
               p: 0.5,
-              border: '2px solid transparent',
-              '&:hover': {
-                borderColor: theme.palette.primary.main
+              border: "2px solid transparent",
+              "&:hover": {
+                borderColor: theme.palette.primary.main,
               },
-              transition: 'all 0.3s ease'
+              transition: "all 0.3s ease",
             }}
           >
-            <Avatar 
-              alt="Admin User" 
-              sx={{ 
-                width: 36, 
+            <Avatar
+              alt="Admin User"
+              sx={{
+                width: 36,
                 height: 36,
-                background: createGradientBackground()
+                background: createGradientBackground(),
               }}
             >
               A
@@ -153,37 +147,37 @@ export default function DashboardHeader({
           </IconButton>
         </Box>
       </Toolbar>
-      
+
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
+          vertical: "bottom",
+          horizontal: "right",
         }}
         keepMounted
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
         open={isMenuOpen}
         onClose={handleMenuClose}
         PaperProps={{
           sx: {
             mt: 1.5,
-            background: 'rgba(30, 30, 30, 0.95)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-            '& .MuiMenuItem-root': {
-              padding: '10px 20px',
+            background: "rgba(30, 30, 30, 0.95)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255, 255, 255, 0.05)",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
+            "& .MuiMenuItem-root": {
+              padding: "10px 20px",
               gap: 2,
-              borderRadius: '4px',
-              margin: '4px',
-              '&:hover': {
-                background: 'rgba(255, 255, 255, 0.05)'
-              }
-            }
-          }
+              borderRadius: "4px",
+              margin: "4px",
+              "&:hover": {
+                background: "rgba(255, 255, 255, 0.05)",
+              },
+            },
+          },
         }}
       >
         <MenuItem onClick={handleGoToProfile}>

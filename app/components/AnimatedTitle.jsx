@@ -4,17 +4,7 @@ import { Typography, Box } from "@mui/material";
 import { motion } from "framer-motion";
 import GradientText from "./GradientText";
 
-interface AnimatedTitleProps {
-  text: string;
-  subtitle?: string;
-  align?: "left" | "center" | "right";
-}
-
-export default function AnimatedTitle({
-  text,
-  subtitle,
-  align = "center",
-}: AnimatedTitleProps) {
+export default function AnimatedTitle({ text, subtitle, align = "center" }) {
   const textArray = text.split(" ");
 
   const containerVariants = {
