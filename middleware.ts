@@ -1,45 +1,43 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // Define public paths that don't require authentication
-  const isPublicPath = 
-    path === '/auth/signin' || 
-    path === '/auth/signup' || 
-    path === '/';
+  // If the path starts with /en, redirect to the same path without /en
+  if (path.startsWith("/en/") || path === "/en") {
+    const newPath = path === "/en" ? "/" : path.slice(3);
+    return NextResponse.redirect(new URL(newPath, request.url));
+  }
 
-  // Check if the path is for dashboard
-  const isDashboardPath = path.startsWith('/dashboard');
+  // Handle authentication redirects
+  const isPublicPath =
+    path === "/auth/signin" || path === "/auth/signup" || path === "/";
+  const isDashboardPath = path.startsWith("/dashboard");
 
-  // Get the session token
-  const token = await getToken({ 
-    req: request, 
-    secret: process.env.NEXTAUTH_SECRET 
-  });
+  const token = request.cookies.get("next-auth.session-token")?.value;
 
-  // Redirect logic
   if (isPublicPath && token) {
-    // If user is on public page but already logged in, redirect to dashboard
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   if (isDashboardPath && !token) {
-    // If user is trying to access dashboard without being logged in
-    return NextResponse.redirect(new URL('/auth/signin', request.url));
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
 
   return NextResponse.next();
 }
 
-// Configure which paths this middleware will run on
 export const config = {
   matcher: [
-    '/',
-    '/dashboard/:path*',
-    '/auth/signin',
-    '/auth/signup',
-    '/auth/signout',
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|public).*)",
   ],
 };

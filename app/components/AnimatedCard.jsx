@@ -12,7 +12,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   border: "1px solid rgba(255, 255, 255, 0.05)",
   transition: "all 0.3s ease",
   "&:hover": {
-    transform: "translateY(-5px)",
+    transform: "translateY(-20px)",
     boxShadow: `0 15px 40px 0 rgba(0, 0, 0, 0.3), 0 0 15px ${theme.palette.primary.main}30`,
     borderColor: `${theme.palette.primary.main}50`,
   },

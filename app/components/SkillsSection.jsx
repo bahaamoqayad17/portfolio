@@ -15,165 +15,147 @@ import AnimatedCard from "./AnimatedCard";
 import { useTheme } from "@mui/material/styles";
 import { createGradientBackground } from "../theme";
 
+const SkillProgressBar = ({ skill }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <Box sx={{ position: "relative" }}>
+      <Tooltip
+        title={skill.description}
+        placement="top"
+        arrow
+        componentsProps={{
+          tooltip: {
+            sx: {
+              bgcolor: "rgba(0, 0, 0, 0.8)",
+              "& .MuiTooltip-arrow": {
+                color: "rgba(0, 0, 0, 0.8)",
+              },
+            },
+          },
+        }}
+      >
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress
+            variant="determinate"
+            value={mounted ? skill.level : 0}
+            sx={{
+              height: 10,
+              borderRadius: 5,
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              cursor: "pointer",
+              "& .MuiLinearProgress-bar": {
+                borderRadius: 5,
+                background: createGradientBackground(),
+                transition: mounted ? 'transform 1s ease-in-out' : 'none',
+              },
+            }}
+          />
+        </Box>
+      </Tooltip>
+    </Box>
+  );
+};
+
 export default function SkillsSection() {
   const theme = useTheme();
   const [skillCategories, setSkillCategories] = useState([
     {
-      category: "Frontend",
+      category: "Frontend Development",
       skills: [
-        {
-          name: "HTML/CSS",
-          level: 95,
-          description: "Semantic HTML, CSS3, Responsive Design",
-          category: "Frontend",
-        },
-        {
-          name: "JavaScript",
-          level: 90,
-          description: "ES6+, TypeScript, DOM Manipulation",
-          category: "Frontend",
-        },
         {
           name: "React",
           level: 92,
-          description: "Hooks, Context API, Redux, Next.js",
-          category: "Frontend",
+          description: "Hooks, Context API, Redux Toolkit, Next.js",
+          category: "Frontend Development",
+        },
+        {
+          name: "Next.js",
+          level: 90,
+          description: "SSR, SSG, Routing, API Routes, Dynamic Imports",
+          category: "Frontend Development",
         },
         {
           name: "UI Frameworks",
-          level: 85,
-          description: "Material UI, Tailwind CSS, Bootstrap",
-          category: "Frontend",
+          level: 88,
+          description: "Material UI, Tailwind CSS, React Native Paper",
+          category: "Frontend Development",
+        },
+        {
+          name: "Responsive Design",
+          level: 93,
+          description: "Mobile-First Approach, Flexbox, CSS Grid",
+          category: "Frontend Development",
         },
       ],
     },
     {
-      category: "Backend",
+      category: "Backend Development",
       skills: [
         {
-          name: "Node.js",
+          name: "Fastify",
+          level: 85,
+          description:
+            "High-performance backend services, schema-based validation",
+          category: "Backend Development",
+        },
+        {
+          name: "Express.js",
           level: 88,
-          description: "Express, API Development, Authentication",
-          category: "Backend",
+          description: "Routing, Middleware, REST APIs",
+          category: "Backend Development",
+        },
+        {
+          name: "API Design & GraphQL",
+          level: 82,
+          description:
+            "RESTful APIs, Token Auth, Best Practices , Apollo Server, Mercurius, Schema Design, Queries & Mutations",
+          category: "Backend Development",
         },
         {
           name: "Databases",
           level: 85,
           description: "MongoDB, PostgreSQL, Prisma ORM",
-          category: "Backend",
-        },
-        {
-          name: "GraphQL",
-          level: 80,
-          description: "Apollo Server, Queries, Mutations",
-          category: "Backend",
-        },
-        {
-          name: "API Design",
-          level: 87,
-          description: "RESTful API, Authentication, Security",
-          category: "Backend",
+          category: "Backend Development",
         },
       ],
     },
     {
-      category: "DevOps & Tools",
+      category: "Mobile Development",
       skills: [
         {
-          name: "Git & GitHub",
-          level: 90,
-          description: "Version Control, Branching, CI/CD",
-          category: "DevOps & Tools",
+          name: "React Native",
+          level: 88,
+          description: "Cross-platform mobile apps, Navigation, Expo",
+          category: "Mobile Development",
         },
         {
-          name: "Docker",
+          name: "Expo",
+          level: 86,
+          description: "Fast development, OTA updates, Push Notifications",
+          category: "Mobile Development",
+        },
+        {
+          name: "Tauri",
           level: 75,
-          description: "Containerization, Docker Compose",
-          category: "DevOps & Tools",
+          description: "Secure & lightweight desktop apps with web tech",
+          category: "Mobile Development",
         },
         {
-          name: "Testing",
-          level: 80,
-          description: "Jest, React Testing Library, Cypress",
-          category: "DevOps & Tools",
-        },
-        {
-          name: "Performance",
-          level: 82,
-          description: "Optimization, Lazy Loading, Code Splitting",
-          category: "DevOps & Tools",
+          name: "Electron.js",
+          level: 78,
+          description: "Desktop apps with Node.js and Chromium",
+          category: "Mobile Development",
         },
       ],
     },
   ]);
+
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   // Fetch skills from API
-  //   const fetchSkills = async () => {
-  //     try {
-  //       const response = await fetch('/api/skills');
-  //       if (response.ok) {
-  //         const data = await response.json();
-
-  //         // Group skills by category
-  //         const groupedSkills = data.reduce((acc: any, skill: Skill) => {
-  //           const existingCategory = acc.find((c: SkillCategory) => c.category === skill.category);
-  //           if (existingCategory) {
-  //             existingCategory.skills.push(skill);
-  //           } else {
-  //             acc.push({
-  //               category: skill.category,
-  //               skills: [skill]
-  //             });
-  //           }
-  //           return acc;
-  //         }, []);
-
-  //         setSkillCategories(groupedSkills);
-  //       } else {
-  //         // If API fails, use default data
-  //         const defaultSkills: SkillCategory[] = [
-  //           {
-  //             category: 'Frontend',
-  //             skills: [
-  //               { name: 'HTML/CSS', level: 95, description: 'Semantic HTML, CSS3, Responsive Design', category: 'Frontend' },
-  //               { name: 'JavaScript', level: 90, description: 'ES6+, TypeScript, DOM Manipulation', category: 'Frontend' },
-  //               { name: 'React', level: 92, description: 'Hooks, Context API, Redux, Next.js', category: 'Frontend' },
-  //               { name: 'UI Frameworks', level: 85, description: 'Material UI, Tailwind CSS, Bootstrap', category: 'Frontend' },
-  //             ]
-  //           },
-  //           {
-  //             category: 'Backend',
-  //             skills: [
-  //               { name: 'Node.js', level: 88, description: 'Express, API Development, Authentication', category: 'Backend' },
-  //               { name: 'Databases', level: 85, description: 'MongoDB, PostgreSQL, Prisma ORM', category: 'Backend' },
-  //               { name: 'GraphQL', level: 80, description: 'Apollo Server, Queries, Mutations', category: 'Backend' },
-  //               { name: 'API Design', level: 87, description: 'RESTful API, Authentication, Security', category: 'Backend' },
-  //             ]
-  //           },
-  //           {
-  //             category: 'DevOps & Tools',
-  //             skills: [
-  //               { name: 'Git & GitHub', level: 90, description: 'Version Control, Branching, CI/CD', category: 'DevOps & Tools' },
-  //               { name: 'Docker', level: 75, description: 'Containerization, Docker Compose', category: 'DevOps & Tools' },
-  //               { name: 'Testing', level: 80, description: 'Jest, React Testing Library, Cypress', category: 'DevOps & Tools' },
-  //               { name: 'Performance', level: 82, description: 'Optimization, Lazy Loading, Code Splitting', category: 'DevOps & Tools' },
-  //             ]
-  //           }
-  //         ];
-
-  //         setSkillCategories(defaultSkills);
-  //       }
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching skills:', error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchSkills();
-  // }, []);
 
   return (
     <Box
@@ -184,10 +166,7 @@ export default function SkillsSection() {
       }}
     >
       <Container>
-        <AnimatedTitle
-          text="My Skills"
-          subtitle="I continuously enhance my skills to deliver modern and efficient solutions"
-        />
+        <AnimatedTitle text="My Skills" subtitle="What I'm good at" />
 
         {loading ? (
           <Box sx={{ textAlign: "center", py: 8 }}>
@@ -268,84 +247,41 @@ export default function SkillsSection() {
                             viewport={{ once: true, amount: 0.1 }}
                             transition={{ delay: 0.2 + skillIndex * 0.1 }}
                           >
-                            <Tooltip
-                              title={skill.description}
-                              placement="top"
-                              arrow
+                            <Box
+                              sx={{
+                                mb: 3,
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 1,
+                              }}
                             >
                               <Box
                                 sx={{
-                                  mb: 3,
-                                  width: "100%",
                                   display: "flex",
-                                  flexDirection: "column",
-                                  gap: 1,
+                                  justifyContent: "space-between",
+                                  alignItems: "center",
                                 }}
                               >
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                  }}
+                                <Typography
+                                  variant="body1"
+                                  fontWeight="bold"
+                                  color="white"
                                 >
-                                  <Typography
-                                    variant="body1"
-                                    fontWeight="medium"
-                                    color="white"
-                                  >
-                                    {skill.name}
-                                  </Typography>
-                                  <Typography variant="body2" color="white">
-                                    {skill.level}%
-                                  </Typography>
-                                </Box>
-                                <Box sx={{ position: "relative" }}>
-                                  <LinearProgress
-                                    variant="determinate"
-                                    value={skill.level}
-                                    sx={{
-                                      height: 10,
-                                      borderRadius: 5,
-                                      backgroundColor:
-                                        "rgba(255, 255, 255, 0.1)",
-                                      "& .MuiLinearProgress-bar": {
-                                        borderRadius: 5,
-                                        background: createGradientBackground(),
-                                      },
-                                    }}
-                                  />
-                                  <Box
-                                    sx={{
-                                      position: "absolute",
-                                      top: 0,
-                                      left: 0,
-                                      right: 0,
-                                      bottom: 0,
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "flex-start",
-                                      px: 1,
-                                      opacity: 0,
-                                      transition: "opacity 0.3s ease",
-                                      "&:hover": {
-                                        opacity: 1,
-                                      },
-                                    }}
-                                  >
-                                    <Typography
-                                      variant="caption"
-                                      sx={{
-                                        color: "white",
-                                        fontSize: "0.6rem",
-                                      }}
-                                    >
-                                      {skill.description}
-                                    </Typography>
-                                  </Box>
-                                </Box>
+                                  {skill.name}
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  fontWeight="bold"
+                                  color="white"
+                                >
+                                  {skill.level}%
+                                </Typography>
                               </Box>
-                            </Tooltip>
+                              <Box sx={{ position: "relative" }}>
+                                <SkillProgressBar skill={skill} />
+                              </Box>
+                            </Box>
                           </motion.div>
                         </Grid>
                       ))}
@@ -357,7 +293,7 @@ export default function SkillsSection() {
           </Grid>
         ) : (
           <Box sx={{ textAlign: "center", py: 8 }}>
-            <Typography>No skills information available.</Typography>
+            <Typography>No data available</Typography>
           </Box>
         )}
       </Container>

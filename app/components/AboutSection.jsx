@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Container,
   Box,
@@ -8,7 +8,7 @@ import {
   Typography,
   Avatar,
   Chip,
-  Paper,
+  Button,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import AnimatedTitle from "./AnimatedTitle";
@@ -16,7 +16,9 @@ import AnimatedCard from "./AnimatedCard";
 import { useTheme } from "@mui/material/styles";
 import CodeIcon from "@mui/icons-material/Code";
 import WebIcon from "@mui/icons-material/Web";
-import StorageIcon from "@mui/icons-material/Storage";
+import MobileIcon from "@mui/icons-material/MobileScreenShare";
+import DesktopIcon from "@mui/icons-material/DesktopWindows";
+import DownloadIcon from "@mui/icons-material/Download";
 import { createGradientBackground } from "../theme";
 
 export default function AboutSection() {
@@ -24,89 +26,49 @@ export default function AboutSection() {
   const [about, setAbout] = useState({
     name: "Bahaa El Moqayad",
     avatar: "/bahaa.jpg",
-    title: "Full Stack JavaScript Developer",
-    bio: "I'm a passionate Full Stack JavaScript Developer with over 5 years of experience building modern web applications. I specialize in React, Next.js, Node.js and TypeScript, focusing on creating performant and scalable solutions that solve real-world problems.",
+    title: "About Me",
+    bio: [
+      "I'm not just here to write code — I'm here to help you build *Your Business*. With over 5 years of experience developing high-impact web, mobile, and desktop applications",
+      "I bring deep technical expertise and a genuine passion for turning ideas into reality. Whether you're starting from scratch or scaling an existing product, I take time to understand your vision, your users, and your goals.",
+      "I specialize in modern JavaScript technologies like React, Next.js, Node.js, Fastify, React Native, Expo, and Electron, and I care deeply about clean, scalable, and user-focused solutions.",
+      "Your project deserves more than just a developer — it deserves a committed partner who's just as excited about your success as you are.",
+      "Let's bring your vision to life — and make it even better than you imagined.",
+    ].join("\n\n"),
     experience: "5+ years",
-    location: "San Francisco, CA",
+    location: "Palestine, Gaza",
     education: "Bachelor's in Computer Science",
     categories: [
       {
-        title: "Frontend Development",
+        title: "Web Development",
         description:
-          "I create responsive, accessible, and performant user interfaces using modern JavaScript frameworks.",
+          "From sleek marketing pages to dynamic SaaS platforms, I build web apps with React, Next.js, and Tailwind CSS. I focus on performance, accessibility, and responsive design to ensure your users get a fast and flawless experience. I also use Material UI for elegant component styling and integrate both REST APIs and GraphQL for robust data interactions.",
         icon: "web",
       },
       {
-        title: "Backend Development",
+        title: "Mobile Development",
         description:
-          "I build robust and scalable APIs and server-side applications with Node.js and Express.",
-        icon: "server",
+          "Using React Native and Expo, I craft smooth, cross-platform mobile apps that feel native. Whether it's a startup MVP or a full-featured product, I use React Native Paper and NativeWind to deliver polished UI/UX, and I always keep user experience and business goals at the core of development.",
+        icon: "mobile",
       },
       {
-        title: "Full Stack Solutions",
+        title: "Desktop Development",
         description:
-          "I deliver end-to-end solutions, from concept to deployment, ensuring seamless integration across the stack.",
-        icon: "code",
+          "When your product needs to live on the desktop, I use Electron.js and Tauri to create fast, secure, and beautiful desktop apps. I bring web technology to the desktop in a way that feels native, efficient, and aligned with your project's long-term vision.",
+        icon: "desktop",
       },
     ],
   });
+
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   // Fetch about data
-  //   const fetchAbout = async () => {
-  //     try {
-  //       const response = await fetch("/api/about");
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setAbout(data);
-  //       } else {
-  //         // If API fails, use default data
-  //         setAbout({
-  //           name: "Bahaa El Moqayad",
-  //           title: "Full Stack JavaScript Developer",
-  //           bio: "I'm a passionate Full Stack JavaScript Developer with over 5 years of experience building modern web applications. I specialize in React, Next.js, Node.js and TypeScript, focusing on creating performant and scalable solutions that solve real-world problems.",
-  //           experience: "5+ years",
-  //           location: "San Francisco, CA",
-  //           education: "Bachelor's in Computer Science",
-  //           categories: [
-  //             {
-  //               title: "Frontend Development",
-  //               description:
-  //                 "I create responsive, accessible, and performant user interfaces using modern JavaScript frameworks.",
-  //               icon: "web",
-  //             },
-  //             {
-  //               title: "Backend Development",
-  //               description:
-  //                 "I build robust and scalable APIs and server-side applications with Node.js and Express.",
-  //               icon: "server",
-  //             },
-  //             {
-  //               title: "Full Stack Solutions",
-  //               description:
-  //                 "I deliver end-to-end solutions, from concept to deployment, ensuring seamless integration across the stack.",
-  //               icon: "code",
-  //             },
-  //           ],
-  //         });
-  //       }
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching about data:", error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchAbout();
-  // }, []);
 
   const renderIcon = (iconName) => {
     switch (iconName) {
       case "web":
         return <WebIcon fontSize="large" />;
-      case "server":
-        return <StorageIcon fontSize="large" />;
+      case "mobile":
+        return <MobileIcon fontSize="large" />;
+      case "desktop":
+        return <DesktopIcon fontSize="large" />;
       case "code":
       default:
         return <CodeIcon fontSize="large" />;
@@ -122,10 +84,7 @@ export default function AboutSection() {
       }}
     >
       <Container>
-        <AnimatedTitle
-          text="About Me"
-          subtitle="Here you'll find more information about me, what I do, and my current skills"
-        />
+        <AnimatedTitle text="About Me" subtitle="Subtitle" />
 
         {loading ? (
           <Box sx={{ textAlign: "center", py: 8 }}>
@@ -224,13 +183,35 @@ export default function AboutSection() {
                       />
                     </Box>
 
-                    <Typography
-                      variant="body1"
-                      paragraph
-                      sx={{ maxWidth: "400px", color: "#fff" }}
+                    <Box sx={{ maxWidth: "400px" }}>
+                      {about.bio.split("\n\n").map((paragraph, index) => (
+                        <Typography
+                          key={index}
+                          variant="body1"
+                          paragraph
+                          sx={{ color: "#fff", mb: 2 }}
+                        >
+                          {paragraph}
+                        </Typography>
+                      ))}
+                    </Box>
+
+                    <Button
+                      variant="contained"
+                      startIcon={<DownloadIcon />}
+                      href="/resume.pdf"
+                      download
+                      sx={{
+                        mt: 2,
+                        background: createGradientBackground(),
+                        color: "#fff",
+                        "&:hover": {
+                          background: createGradientBackground(45),
+                        },
+                      }}
                     >
-                      {about.bio}
-                    </Typography>
+                      Download Resume
+                    </Button>
                   </Box>
                 </Box>
               </motion.div>

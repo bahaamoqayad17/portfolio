@@ -1,11 +1,12 @@
 "use client";
 
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import GradientText from "./GradientText";
 
 export default function AnimatedTitle({ text, subtitle, align = "center" }) {
   const textArray = text.split(" ");
+  const theme = useTheme();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -48,7 +49,11 @@ export default function AnimatedTitle({ text, subtitle, align = "center" }) {
             <motion.span
               key={index}
               variants={childVariants}
-              style={{ display: "inline-block", marginRight: "0.5rem" }}
+              style={{
+                display: "inline-block",
+                marginRight: "0.5rem",
+                color: "hsl(251, 100.00%, 6.30%))",
+              }}
             >
               {index === textArray.length - 1 ? (
                 <GradientText variant="h2" animationDuration={10}>

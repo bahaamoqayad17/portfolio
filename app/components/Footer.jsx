@@ -13,7 +13,7 @@ import {
 import { motion } from "framer-motion";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailIcon from "@mui/icons-material/Email";
 import Link from "next/link";
 import GradientText from "./GradientText";
@@ -25,18 +25,35 @@ export default function Footer() {
 
   const sections = [
     { name: "Home", href: "#hero" },
+    { name: "Stats", href: "#stats" },
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
+    { name: "Companies", href: "#companies" },
     { name: "Contact", href: "#contact" },
-    { name: "Dashboard", href: "/dashboard" },
   ];
 
   const socialLinks = [
-    { icon: <GitHubIcon />, href: "https://github.com", label: "GitHub" },
-    { icon: <LinkedInIcon />, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: <TwitterIcon />, href: "https://twitter.com", label: "Twitter" },
-    { icon: <EmailIcon />, href: "mailto:contact@example.com", label: "Email" },
+    {
+      icon: <GitHubIcon />,
+      href: "https://github.com/bahaamoqayad17",
+      label: "GitHub",
+    },
+    {
+      icon: <LinkedInIcon />,
+      href: "https://linkedin.com/in/bahaamoqayad17",
+      label: "LinkedIn",
+    },
+    {
+      icon: <InstagramIcon />,
+      href: "https://instagram.com/bahaamoqayad17",
+      label: "Instagram",
+    },
+    {
+      icon: <EmailIcon />,
+      href: "mailto:bahaamoqayad.200030@gmail.com",
+      label: "Email",
+    },
   ];
 
   return (
@@ -81,8 +98,9 @@ export default function Footer() {
                 color="text.secondary"
                 sx={{ mb: 3, maxWidth: "400px", color: "#fff" }}
               >
-                A passionate Full Stack JavaScript Developer building modern web
-                applications with cutting-edge technologies.
+                I'm not just here to write code — I'm here to help you build
+                *Your Business*. With over 5 years of experience developing
+                high-impact web, mobile, and desktop applications
               </Typography>
               <Box sx={{ display: "flex", gap: 1 }}>
                 {socialLinks.map((link, index) => (
@@ -198,7 +216,7 @@ export default function Footer() {
                     sx={{ mr: 1.5, color: theme.palette.primary.main }}
                   />
                   <Typography variant="body2" color="white">
-                    bahaamoqayad.2000030@gmail.com
+                    bahaamoqayad.200030@gmail.com
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", alignItems: "flex-start" }}>
@@ -265,14 +283,10 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" color="white">
-            © {currentYear} Portfolio. All rights reserved.
+            © {currentYear} All rights reserved.
           </Typography>
           <Typography variant="body2" color="white">
-            Designed & Built with{" "}
-            <Box component="span" sx={{ color: theme.palette.error.main }}>
-              ❤
-            </Box>{" "}
-            by Bahaa El Moqayad
+            Built with Next.js and Material-UI
           </Typography>
         </Box>
       </Container>

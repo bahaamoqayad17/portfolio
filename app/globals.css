@@ -3,8 +3,16 @@
   --border-radius: 12px;
   --background-start: #121212;
   --background-end: #1e1e1e;
-  --primary-glow: linear-gradient(45deg, rgba(106, 17, 203, 0.3), rgba(37, 117, 252, 0.3));
-  --secondary-glow: linear-gradient(135deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+  --primary-glow: linear-gradient(
+    45deg,
+    rgba(106, 17, 203, 0.3),
+    rgba(37, 117, 252, 0.3)
+  );
+  --secondary-glow: linear-gradient(
+    135deg,
+    rgba(106, 17, 203, 0.1),
+    rgba(37, 117, 252, 0.1)
+  );
   --primary-gradient: linear-gradient(45deg, #6a11cb, #2575fc);
   --secondary-gradient: linear-gradient(135deg, #2575fc, #6a11cb);
 }
@@ -20,7 +28,11 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+  background: linear-gradient(
+    to bottom,
+    var(--background-start),
+    var(--background-end)
+  );
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -127,7 +139,7 @@ a {
   .section {
     padding: 60px 0;
   }
-  
+
   .grid {
     gap: 16px;
   }
@@ -137,7 +149,7 @@ a {
   .section {
     padding: 40px 0;
   }
-  
+
   .grid {
     gap: 12px;
   }

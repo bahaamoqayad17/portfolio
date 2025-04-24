@@ -79,7 +79,7 @@ export default function ContactSection() {
     } catch (error) {
       setAlert({
         open: true,
-        message: "An error occurred. Please try again later.",
+        message: "Failed to send message. Please try again later.",
         severity: "error",
       });
     } finally {
@@ -95,20 +95,20 @@ export default function ContactSection() {
     {
       icon: <EmailIcon fontSize="large" />,
       title: "Email",
-      content: "contact@example.com",
-      link: "mailto:contact@example.com",
+      content: "bahaamoqayad.200030@gmail.com",
+      link: "mailto:bahaamoqayad.200030@gmail.com",
     },
     {
       icon: <PhoneIcon fontSize="large" />,
       title: "Phone",
-      content: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      content: "+972598623000",
+      link: "https://wa.me/+972598623000",
     },
     {
       icon: <LocationOnIcon fontSize="large" />,
       title: "Location",
-      content: "San Francisco, CA",
-      link: "https://maps.google.com/?q=San+Francisco,+CA",
+      content: "Palestine, Gaza",
+      link: "https://maps.google.com/?q=Palestine, Gaza",
     },
   ];
 
@@ -397,7 +397,6 @@ export default function ContactSection() {
                     "Send Message"
                   )}
                 </Button>
-                {/* </Grid> */}
               </Grid>
             </Paper>
           </AnimatedCard>

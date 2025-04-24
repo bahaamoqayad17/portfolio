@@ -135,11 +135,12 @@ export default function HeroSection() {
                 sx={{
                   mb: 2,
                   fontWeight: "bold",
-                  fontSize: { xs: 28, md: 36 },
+                  fontSize: { xs: 32, md: 48 },
                   color: "#2196F3",
+                  paddingTop: { xs: "70px", md: "0px" },
                 }}
               >
-                Full Stack JavaScript Developer
+                Software Developer
               </Typography>
             </motion.div>
 
@@ -162,7 +163,7 @@ export default function HeroSection() {
                   variant="h1"
                   animationDuration={12}
                 >
-                  Modern Web Experiences
+                  Modern Web & Mobile Experiences
                 </GradientText>{" "}
                 With Passion
               </Typography>
@@ -179,8 +180,8 @@ export default function HeroSection() {
                   mx: "auto",
                 }}
               >
-                I create performant, responsive, and beautiful web applications
-                with modern JavaScript technologies.
+                I create performant, responsive, and beautiful web and mobile
+                applications with modern JavaScript technologies.
               </Typography>
             </motion.div>
 
@@ -226,7 +227,7 @@ export default function HeroSection() {
                   },
                 }}
               >
-                View Projects
+                View My Work
               </Button>
               <Button
                 component={Link}
@@ -275,7 +276,7 @@ export default function HeroSection() {
                   },
                 }}
               >
-                Contact Me
+                Contact
               </Button>
             </motion.div>
           </Box>

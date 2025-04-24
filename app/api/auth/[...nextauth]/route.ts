@@ -1,6 +1,6 @@
-import NextAuth from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { createDefaultAdminUser } from '@/lib/auth';
+import NextAuth from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { createDefaultAdminUser } from "@/lib/auth";
 
 // Create default admin user if needed
 createDefaultAdminUser().catch(console.error);

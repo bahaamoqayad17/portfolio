@@ -1,43 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
+import StatsSection from "./components/StatsSection";
+import TestimonialsSection from "./components/TestimonialsSection";
+import CompaniesSection from "./components/CompaniesSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import ParticlesBackground from "./components/ParticlesBackground";
 import { motion } from "framer-motion";
 
-export default function HomePage() {
-  // Add smooth scrolling for anchor links
-  useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest("a");
-
-      if (anchor && anchor.getAttribute("href")?.startsWith("#")) {
-        e.preventDefault();
-        const id = anchor.getAttribute("href")?.replace("#", "");
-        const element = document.getElementById(id || "");
-
-        if (element) {
-          window.scrollTo({
-            behavior: "smooth",
-            top: element.offsetTop - 80, // Account for navbar height
-          });
-        }
-      }
-    };
-
-    document.addEventListener("click", handleAnchorClick);
-    return () => document.removeEventListener("click", handleAnchorClick);
-  }, []);
-
-  // Variants for staggered animation on scroll
+export default function Home() {
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -83,6 +60,15 @@ export default function HomePage() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
+          <StatsSection />
+        </motion.div>
+
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <AboutSection />
         </motion.div>
 
@@ -102,6 +88,24 @@ export default function HomePage() {
           viewport={{ once: true, amount: 0.1 }}
         >
           <ProjectsSection />
+        </motion.div>
+
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <TestimonialsSection />
+        </motion.div>
+
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <CompaniesSection />
         </motion.div>
 
         <motion.div

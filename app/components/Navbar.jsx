@@ -15,14 +15,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import GradientText from "./GradientText";
 
-const pages = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
-];
-
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [activeSection, setActiveSection] = useState("hero");
@@ -35,6 +27,17 @@ function Navbar() {
     ["blur(0px)", "blur(10px)"]
   );
   const navbarHeight = useTransform(scrollY, [0, 100], ["80px", "70px"]);
+
+  const pages = [
+    { name: "Home", href: "#hero" },
+    { name: "Stats", href: "#stats" },
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Projects", href: "#projects" },
+    { name: "Testimonials", href: "#testimonials" },
+    { name: "Companies", href: "#companies" },
+    { name: "Contact", href: "#contact" },
+  ];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -67,7 +70,7 @@ function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pages]);
 
   return (
     <motion.div
@@ -151,7 +154,7 @@ function Navbar() {
                       color:
                         activeSection === page.href.replace("#", "")
                           ? "primary.main"
-                          : "text.primary",
+                          : "#fff",
                       "&:hover": {
                         background: "rgba(106, 17, 203, 0.1)",
                       },
@@ -187,60 +190,56 @@ function Navbar() {
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
-                justifyContent: "center",
+                justifyContent: "flex-end",
               }}
             >
-              {pages.map((page) => {
-                const isActive = activeSection === page.href.replace("#", "");
-                return (
-                  <Button
-                    key={page.name}
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    href={page.href}
-                    sx={{
-                      my: 2,
-                      mx: 1.5,
-                      color: "white",
-                      display: "block",
-                      position: "relative",
-                      "&::after": {
-                        content: '""',
-                        position: "absolute",
-                        bottom: "10px",
-                        left: isActive ? "10%" : "50%",
-                        right: isActive ? "10%" : "50%",
-                        height: "2px",
-                        background: "linear-gradient(45deg, #6a11cb, #2575fc)",
-                        transition: "all 0.3s ease",
-                        opacity: isActive ? 1 : 0,
-                      },
-                      "&:hover::after": {
-                        left: "10%",
-                        right: "10%",
-                        opacity: 1,
-                      },
-                    }}
-                  >
-                    {page.name}
-                  </Button>
-                );
-              })}
-            </Box>
-
-            {/* Right side action button */}
-            {/* <Box sx={{ flexGrow: 0 }}>
-              <Button
-                component={Link}
-                href="/dashboard"
-                variant="contained"
+              <Box
                 sx={{
-                  display: { xs: "none", md: "block" },
+                  flexGrow: 1,
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: 2,
                 }}
               >
-                Dashboard
-              </Button>
-            </Box> */}
+                {pages.map((page) => {
+                  const isActive = activeSection === page.href.replace("#", "");
+                  return (
+                    <Button
+                      key={page.name}
+                      onClick={handleCloseNavMenu}
+                      component={Link}
+                      href={page.href}
+                      sx={{
+                        my: 2,
+                        mx: 0.5,
+                        color: "white",
+                        display: "block",
+                        position: "relative",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          bottom: "10px",
+                          left: isActive ? "10%" : "50%",
+                          right: isActive ? "10%" : "50%",
+                          height: "2px",
+                          background:
+                            "linear-gradient(45deg, #6a11cb, #2575fc)",
+                          transition: "all 0.3s ease",
+                          opacity: isActive ? 1 : 0,
+                        },
+                        "&:hover::after": {
+                          left: "10%",
+                          right: "10%",
+                          opacity: 1,
+                        },
+                      }}
+                    >
+                      {page.name}
+                    </Button>
+                  );
+                })}
+              </Box>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>

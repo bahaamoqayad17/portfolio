@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Container,
   Box,
-  Grid,
   Typography,
   Button,
   Card,
@@ -14,7 +13,6 @@ import {
   Chip,
   Tab,
   Tabs,
-  useTheme,
 } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedTitle from "./AnimatedTitle";
@@ -24,175 +22,225 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import { createGradientBackground } from "../theme";
 
 export default function ProjectsSection() {
-  const theme = useTheme();
   const [projects, setProjects] = useState([
     {
-      id: "1",
-      title: "E-Commerce Platform",
+      id: 1,
+      title: "AlPazar Ads Mobile Application",
       description:
-        "A full-featured e-commerce platform built with Next.js, TypeScript, and Material UI. Includes product listings, cart functionality, and secure checkout.",
-      image: "/assets/project-placeholder.svg",
+        "A classified ads mobile app built with React Native and Expo, allowing users to list and browse items across multiple categories.",
+      role: "Lead Developer",
+      technologies: [
+        "React Native",
+        "Expo",
+        "React Native Paper",
+        "Node.js",
+        "GraphQL",
+        "Fastify",
+        "Next.js",
+        "Material UI",
+      ],
+      demoUrl: "",
+      githubUrl: "https://github.com/bahaamoqayad17/AlPazar",
+    },
+    {
+      id: 2,
+      title: "Elite Academy Platform",
+      description:
+        "An e-learning and course management system for students and trainers, built to be responsive and accessible across all devices.",
+      role: "Frontend Developer",
+      technologies: ["Laravel", "Blade", "JQuery", "Bootstrap"],
+      demoUrl: "",
+      githubUrl: "https://github.com/bahaamoqayad17/Elite-Website",
+    },
+    {
+      id: 3,
+      title: "Adzirc Affiliate Marketing Platform",
+      description:
+        "Modern affiliate marketing platform with campaign management, lead tracking, and responsive dashboards.",
+      role: "Full Stack Developer",
       technologies: [
         "Next.js",
-        "TypeScript",
+        "React",
+        "Node.js",
+        "Express.js",
         "Material UI",
-        "Stripe",
         "MongoDB",
       ],
-      demoUrl: "https://example.com/ecommerce",
-      githubUrl: "https://github.com/username/ecommerce",
-      category: "Full Stack",
+      demoUrl: "https://offerwall.vercel.app/",
+      githubUrl: "https://github.com/bahaamoqayad17/OfferWall",
     },
     {
-      id: "2",
-      title: "Task Management App",
+      id: 4,
+      title: "Tips Trips Website",
       description:
-        "A collaborative task management application with real-time updates, team workspaces, and progress tracking functionality.",
-      image: "/assets/project-placeholder.svg",
-      technologies: ["React", "Node.js", "Express", "Socket.io", "PostgreSQL"],
-      demoUrl: "https://example.com/taskmanager",
-      githubUrl: "https://github.com/username/taskmanager",
-      category: "Full Stack",
+        "A web app for tourists to plan trips and for hotels to manage bookings, with a responsive design and control panel.",
+      role: "Frontend Developer",
+      technologies: ["Next.js", "React", "Material UI", "Redux ToolKit"],
+      demoUrl: "https://tips-trips.vercel.app/",
+      githubUrl: "https://github.com/bahaamoqayad17/TipsTrips",
     },
     {
-      id: "3",
-      title: "Portfolio Website",
+      id: 5,
+      title: "Moalime E-Learning Platform",
       description:
-        "A responsive portfolio website built with Next.js and TypeScript showcasing modern design principles and animations.",
-      image: "/assets/project-placeholder.svg",
-      technologies: ["Next.js", "TypeScript", "Framer Motion", "Material UI"],
-      demoUrl: "https://example.com/portfolio",
-      githubUrl: "https://github.com/username/portfolio",
-      category: "Frontend",
+        "Global e-learning platform for subjects like Math and Science, featuring instructor-led content and responsive UI.",
+      role: "Frontend Developer",
+      technologies: ["Next.js", "React", "Material UI", "Redux ToolKit"],
+      demoUrl: "https://moalime.com/",
+      githubUrl: "https://github.com/bahaamoqayad17/moalmi-front",
     },
     {
-      id: "4",
-      title: "RESTful API Service",
+      id: 6,
+      title: "Makani Travel Platform",
       description:
-        "A scalable RESTful API service with complete documentation, authentication, and rate limiting.",
-      image: "/assets/project-placeholder.svg",
-      technologies: ["Node.js", "Express", "MongoDB", "JWT", "Swagger"],
-      githubUrl: "https://github.com/username/api-service",
-      category: "Backend",
+        "Travel platform connecting users with Muslim-friendly experiences and accommodations around the world.",
+      role: "Full Stack Developer",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Stripe", "Prisma"],
+      demoUrl: "https://makanihomes.com/",
+      githubUrl: "",
     },
     {
-      id: "5",
-      title: "Weather Dashboard",
+      id: 7,
+      title: "Maydan App",
       description:
-        "An interactive weather dashboard providing real-time weather data and forecasts using external API integration.",
-      image: "/assets/project-placeholder.svg",
-      technologies: ["React", "Redux", "Chart.js", "Weather API"],
-      demoUrl: "https://example.com/weather",
-      githubUrl: "https://github.com/username/weather-app",
-      category: "Frontend",
+        "Mobile app to help students in Gaza find internships with top companies, built with React Native and Firebase.",
+      role: "Mobile Developer",
+      technologies: ["React Native", "Expo", "Firebase", "Tailwind CSS"],
+      demoUrl: "",
+      githubUrl: "https://github.com/bahaamoqayad17/Maydan",
     },
     {
-      id: "6",
-      title: "Blog Platform",
+      id: 8,
+      title: "Investor App",
       description:
-        "A full-featured blog platform with rich text editing, user authentication, and content management.",
-      image: "/assets/project-placeholder.svg",
-      technologies: ["React", "Node.js", "MongoDB", "Express", "Draft.js"],
-      demoUrl: "https://example.com/blog",
-      githubUrl: "https://github.com/username/blog-platform",
-      category: "Full Stack",
+        "A financial mobile app for managing crypto and stock portfolios, secure transactions, and wallet tracking.",
+      role: "Lead Mobile Developer",
+      technologies: [
+        "React Native",
+        "Expo",
+        "Redux Toolkit",
+        "Node.js",
+        "MongoDB",
+      ],
+      demoUrl: "",
+      githubUrl: "",
+      category: "Mobile App",
+    },
+    {
+      id: 9,
+      title: "Store Mobile Application",
+      description:
+        "A modern e-commerce app for browsing, purchasing, and managing orders with payment integration.",
+      role: "Mobile Developer",
+      technologies: ["React Native", "Expo", "Stripe", "Redux Toolkit"],
+      demoUrl: "",
+      githubUrl: "",
+      category: "Mobile App",
+    },
+    {
+      id: 10,
+      title: "OVerse Landing Page",
+      description:
+        "Landing page for a futuristic tech startup, built with elegant UI, animations, and full mobile responsiveness.",
+      role: "Frontend Developer",
+      technologies: ["Next.js", "React", "Bootstrap", "Redux Toolkit"],
+      demoUrl: "https://o-verse.vercel.app/",
+      githubUrl: "https://github.com/bahaamoqayad17/OVerse",
+    },
+    {
+      id: 11,
+      title: "Aghati Shopping App",
+      description:
+        "An onboarding and shopping mobile app designed for modern consumers, offering smart purchasing, secure payment, and seamless UX.",
+      role: "Full Stack Developer",
+      technologies: [
+        "React",
+        "Next.js",
+        "Redux Toolkit",
+        "Node.js",
+        "PostgreSQL",
+        "Material UI",
+      ],
+      demoUrl: "",
+      githubUrl: "https://github.com/bahaamoqayad17/Aghati",
+    },
+    {
+      id: 12,
+      title: "Booklet Website",
+      description:
+        "A web-based personal finance management platform, helping users track their financial data efficiently and securely.",
+      role: "Frontend Developer",
+      technologies: ["HTML", "CSS", "JavaScript", "JQuery", "Bootstrap"],
+      demoUrl: "https://booklet-website.netlify.app/",
+      githubUrl: "https://github.com/bahaamoqayad17/Booklet-WebSite",
+    },
+    {
+      id: 13,
+      title: "Clinic Management System",
+      description:
+        "A clinic management platform to streamline patient records, appointments, and schedules for private medical practices.",
+      role: "Full Stack Developer",
+      technologies: [
+        "React",
+        "Next.js",
+        "Node.js",
+        "MongoDB",
+        "Express",
+        "Material UI",
+      ],
+      demoUrl: "https://full-clinic.netlify.app/",
+      githubUrl: "https://github.com/bahaamoqayad17/Full-Clinic",
+    },
+    {
+      id: 14,
+      title: "Dobby Landing Page",
+      description:
+        "A stylish landing page for a marine or adventure-themed brand, built with modern UI components and smooth navigation.",
+      role: "Full Stack Developer",
+      technologies: ["Laravel", "Blade", "JQuery", "Bootstrap", "MySQL"],
+      demoUrl: "https://dolphin-club.netlify.app/",
+      githubUrl: "https://github.com/bahaamoqayad17/Dolphin-Club",
+    },
+    {
+      id: 15,
+      title: "EWave App",
+      description:
+        "A finance and stock analysis mobile app for traders and investors to track market movement and manage portfolios.",
+      role: "Lead Developer",
+      technologies: [
+        "Node.js",
+        "Next.js",
+        "Express",
+        "MongoDB",
+        "Material UI",
+        "PayPal",
+      ],
+      demoUrl: "https://ewaveonline.com/",
+      githubUrl: "https://github.com/bahaamoqayad17/EWave",
+    },
+    {
+      id: 16,
+      title: "Nest Grocery Store",
+      description:
+        "An e-commerce grocery platform offering intuitive navigation, product filtering, and responsive design for online shopping.",
+      role: "Full Stack Developer",
+      technologies: [
+        "Next.js",
+        "Node.js",
+        "MongoDB",
+        "Material UI",
+        "Stripe",
+        "Redux Toolkit",
+      ],
+      demoUrl: "https://personal-multivendor.netlify.app/",
+      githubUrl: "https://github.com/bahaamoqayad17/Personal-Multivendor",
     },
   ]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-
-  // useEffect(() => {
-  //   // Fetch projects from API
-  //   const fetchProjects = async () => {
-  //     try {
-  //       const response = await fetch('/api/projects');
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setProjects(data);
-
-  //         // Extract unique categories
-  //         const uniqueCategories = Array.from(new Set(data.map((project: Project) => project.category))) as string[];
-  //         setCategories(['All', ...uniqueCategories]);
-  //       } else {
-  //         // If API fails, use default data
-  //         const defaultProjects = [
-  //           {
-  //             id: '1',
-  //             title: 'E-Commerce Platform',
-  //             description: 'A full-featured e-commerce platform built with Next.js, TypeScript, and Material UI. Includes product listings, cart functionality, and secure checkout.',
-  //             image: '/assets/project-placeholder.svg',
-  //             technologies: ['Next.js', 'TypeScript', 'Material UI', 'Stripe', 'MongoDB'],
-  //             demoUrl: 'https://example.com/ecommerce',
-  //             githubUrl: 'https://github.com/username/ecommerce',
-  //             category: 'Full Stack'
-  //           },
-  //           {
-  //             id: '2',
-  //             title: 'Task Management App',
-  //             description: 'A collaborative task management application with real-time updates, team workspaces, and progress tracking functionality.',
-  //             image: '/assets/project-placeholder.svg',
-  //             technologies: ['React', 'Node.js', 'Express', 'Socket.io', 'PostgreSQL'],
-  //             demoUrl: 'https://example.com/taskmanager',
-  //             githubUrl: 'https://github.com/username/taskmanager',
-  //             category: 'Full Stack'
-  //           },
-  //           {
-  //             id: '3',
-  //             title: 'Portfolio Website',
-  //             description: 'A responsive portfolio website built with Next.js and TypeScript showcasing modern design principles and animations.',
-  //             image: '/assets/project-placeholder.svg',
-  //             technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Material UI'],
-  //             demoUrl: 'https://example.com/portfolio',
-  //             githubUrl: 'https://github.com/username/portfolio',
-  //             category: 'Frontend'
-  //           },
-  //           {
-  //             id: '4',
-  //             title: 'RESTful API Service',
-  //             description: 'A scalable RESTful API service with complete documentation, authentication, and rate limiting.',
-  //             image: '/assets/project-placeholder.svg',
-  //             technologies: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Swagger'],
-  //             githubUrl: 'https://github.com/username/api-service',
-  //             category: 'Backend'
-  //           },
-  //           {
-  //             id: '5',
-  //             title: 'Weather Dashboard',
-  //             description: 'An interactive weather dashboard providing real-time weather data and forecasts using external API integration.',
-  //             image: '/assets/project-placeholder.svg',
-  //             technologies: ['React', 'Redux', 'Chart.js', 'Weather API'],
-  //             demoUrl: 'https://example.com/weather',
-  //             githubUrl: 'https://github.com/username/weather-app',
-  //             category: 'Frontend'
-  //           },
-  //           {
-  //             id: '6',
-  //             title: 'Blog Platform',
-  //             description: 'A full-featured blog platform with rich text editing, user authentication, and content management.',
-  //             image: '/assets/project-placeholder.svg',
-  //             technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Draft.js'],
-  //             demoUrl: 'https://example.com/blog',
-  //             githubUrl: 'https://github.com/username/blog-platform',
-  //             category: 'Full Stack'
-  //           }
-  //         ];
-
-  //         setProjects(defaultProjects);
-
-  //         // Extract unique categories
-  //         const uniqueCategories = Array.from(new Set(defaultProjects.map((project) => project.category)));
-  //         setCategories(['All', ...uniqueCategories]);
-  //       }
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching projects:', error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchProjects();
-  // }, []);
+  const [showAll, setShowAll] = useState(false);
+  const initialProjectsCount = 6;
 
   const handleCategoryChange = (event, newCategory) => {
     setSelectedCategory(newCategory);
@@ -202,6 +250,12 @@ export default function ProjectsSection() {
     selectedCategory === "All"
       ? projects
       : projects.filter((project) => project.category === selectedCategory);
+
+  const displayedProjects = showAll
+    ? filteredProjects
+    : filteredProjects.slice(0, initialProjectsCount);
+
+  const hasMoreProjects = filteredProjects.length > initialProjectsCount;
 
   return (
     <Box
@@ -220,7 +274,7 @@ export default function ProjectsSection() {
 
         {loading ? (
           <Box sx={{ textAlign: "center", py: 8 }}>
-            <Typography>Loading projects...</Typography>
+            <Typography>Loading...</Typography>
           </Box>
         ) : projects.length > 0 ? (
           <>
@@ -266,7 +320,7 @@ export default function ProjectsSection() {
                 <Box
                   sx={{ display: "flex", flexWrap: "wrap", margin: "-16px" }}
                 >
-                  {filteredProjects.map((project, index) => (
+                  {displayedProjects.map((project, index) => (
                     <Box
                       key={project.id}
                       sx={{
@@ -291,6 +345,7 @@ export default function ProjectsSection() {
                               width: "100%",
                               height: "5px",
                               background: createGradientBackground(),
+                              zIndex: 50000,
                             },
                           }}
                         >
@@ -298,14 +353,13 @@ export default function ProjectsSection() {
                             component="div"
                             sx={{
                               height: 0,
-                              paddingTop: "56.25%", // 16:9 aspect ratio
+                              paddingTop: "95%",
                               position: "relative",
                               overflow: "hidden",
-                              background: `url('https://via.placeholder.com/400x225?text=${encodeURIComponent(
-                                project.title
-                              )}')`,
+                              background: `url('/projects/${project.id}.jpg')`,
                               backgroundSize: "cover",
                               backgroundPosition: "center",
+                              backgroundRepeat: "no-repeat",
                             }}
                           />
                           <CardContent sx={{ flexGrow: 1, p: 3 }}>
@@ -317,6 +371,13 @@ export default function ProjectsSection() {
                               color="white"
                             >
                               {project.title}
+                            </Typography>
+                            <Typography
+                              variant="subtitle1"
+                              color="primary.main"
+                              sx={{ mb: 1 }}
+                            >
+                              Role: {project.role}
                             </Typography>
                             <Typography
                               variant="body2"
@@ -340,7 +401,8 @@ export default function ProjectsSection() {
                                   size="small"
                                   sx={{
                                     backgroundColor: "rgba(106, 17, 203, 0.1)",
-                                    borderColor: "rgba(106, 17, 203, 0.3)",
+                                    borderColor: "rgb(177, 177, 177)",
+                                    borderWidth: "3px",
                                     margin: "2px",
                                     color: "#fff",
                                   }}
@@ -358,7 +420,7 @@ export default function ProjectsSection() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
-                                Live Demo
+                                View Demo
                               </Button>
                             )}
                             {project.githubUrl && (
@@ -371,7 +433,7 @@ export default function ProjectsSection() {
                                 rel="noopener noreferrer"
                                 sx={{ ml: 1 }}
                               >
-                                Code
+                                View Code
                               </Button>
                             )}
                           </CardActions>
@@ -380,12 +442,32 @@ export default function ProjectsSection() {
                     </Box>
                   ))}
                 </Box>
+
+                {hasMoreProjects && (
+                  <Box
+                    sx={{ display: "flex", justifyContent: "center", mt: 4 }}
+                  >
+                    <Button
+                      variant="contained"
+                      onClick={() => setShowAll(!showAll)}
+                      sx={{
+                        background: createGradientBackground(),
+                        color: "#fff",
+                        "&:hover": {
+                          background: createGradientBackground(45),
+                        },
+                      }}
+                    >
+                      {showAll ? "Show Less" : "View All Projects"}
+                    </Button>
+                  </Box>
+                )}
               </motion.div>
             </AnimatePresence>
           </>
         ) : (
           <Box sx={{ textAlign: "center", py: 8 }}>
-            <Typography>No projects available.</Typography>
+            <Typography>No data available</Typography>
           </Box>
         )}
       </Container>
