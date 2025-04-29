@@ -153,6 +153,7 @@ export default function HeroSection() {
                   fontWeight: 900,
                   fontSize: { xs: "2.5rem", sm: "3.5rem", md: "4.5rem" },
                   lineHeight: 1.2,
+                  color: "#fff",
                 }}
               >
                 Building{" "}

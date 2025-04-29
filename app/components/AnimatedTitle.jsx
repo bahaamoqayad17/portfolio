@@ -52,7 +52,7 @@ export default function AnimatedTitle({ text, subtitle, align = "center" }) {
               style={{
                 display: "inline-block",
                 marginRight: "0.5rem",
-                color: "hsl(251, 100.00%, 6.30%))",
+                color: "#fff",
               }}
             >
               {index === textArray.length - 1 ? (
