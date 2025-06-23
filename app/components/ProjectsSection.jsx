@@ -49,7 +49,7 @@ export default function ProjectsSection() {
         "An e-learning and course management system for students and trainers, built to be responsive and accessible across all devices.",
       role: "Frontend Developer",
       technologies: ["Laravel", "Blade", "JQuery", "Bootstrap"],
-      demoUrl: "",
+      demoUrl: "https://3lbazaar.com/elite/",
       githubUrl: "https://github.com/bahaamoqayad17/Elite-Website",
     },
     {

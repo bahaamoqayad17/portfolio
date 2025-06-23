@@ -51,7 +51,7 @@ export default function Footer() {
     },
     {
       icon: <EmailIcon />,
-      href: "mailto:bahaamoqayad.200030@gmail.com",
+      href: "mailto:bahaamoqayad17@gmail.com",
       label: "Email",
     },
   ];
@@ -216,7 +216,7 @@ export default function Footer() {
                     sx={{ mr: 1.5, color: theme.palette.primary.main }}
                   />
                   <Typography variant="body2" color="white">
-                    bahaamoqayad.200030@gmail.com
+                    bahaamoqayad17@gmail.com
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", alignItems: "flex-start" }}>

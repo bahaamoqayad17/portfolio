@@ -28,6 +28,7 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile: "",
     subject: "",
     message: "",
   });
@@ -66,6 +67,7 @@ export default function ContactSection() {
         setFormData({
           name: "",
           email: "",
+          mobile: "",
           subject: "",
           message: "",
         });
@@ -95,8 +97,8 @@ export default function ContactSection() {
     {
       icon: <EmailIcon fontSize="large" />,
       title: "Email",
-      content: "bahaamoqayad.200030@gmail.com",
-      link: "mailto:bahaamoqayad.200030@gmail.com",
+      content: "bahaamoqayad17@gmail.com",
+      link: "mailto:bahaamoqayad17@gmail.com",
     },
     {
       icon: <PhoneIcon fontSize="large" />,
@@ -285,6 +287,40 @@ export default function ContactSection() {
                   label="Your Email"
                   type="email"
                   value={formData.email}
+                  onChange={handleChange}
+                  variant="outlined"
+                  disabled={loading}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "rgba(255, 255, 255, 0.23)",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "rgba(255, 255, 255, 0.5)",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "white",
+                      },
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "rgba(255, 255, 255, 0.7)",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "white",
+                    },
+                    "& .MuiInputBase-input": {
+                      color: "white",
+                    },
+                  }}
+                />
+                <TextField
+                  required
+                  fullWidth
+                  id="mobile"
+                  name="mobile"
+                  label="Mobile Number"
+                  type="tel"
+                  value={formData.mobile}
                   onChange={handleChange}
                   variant="outlined"
                   disabled={loading}
