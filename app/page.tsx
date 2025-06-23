@@ -12,7 +12,7 @@ import CompaniesSection from "./components/CompaniesSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import ParticlesBackground from "./components/ParticlesBackground";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
 
 export default function Home() {
   const sectionVariants = {
@@ -22,7 +22,7 @@ export default function Home() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: easeOut,
       },
     },
   };
