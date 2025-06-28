@@ -199,8 +199,11 @@ export default function AboutSection() {
                     <Button
                       variant="contained"
                       startIcon={<DownloadIcon />}
-                      href="/resume.pdf"
-                      download
+                      component="a"
+                      href="/Resume.pdf"
+                      download="Bahaa_El_Moqayad_Resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       sx={{
                         mt: 2,
                         background: createGradientBackground(),

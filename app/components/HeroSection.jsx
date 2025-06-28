@@ -140,7 +140,7 @@ export default function HeroSection() {
                   paddingTop: { xs: "70px", md: "0px" },
                 }}
               >
-                Software Developer
+                Lead Full-Stack Developer
               </Typography>
             </motion.div>
 

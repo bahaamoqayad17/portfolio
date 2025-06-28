@@ -94,7 +94,7 @@ export default function ProjectsSection() {
       title: "Makani Travel Platform",
       description:
         "Travel platform connecting users with Muslim-friendly experiences and accommodations around the world.",
-      role: "Full Stack Developer",
+      role: "Lead Engineer",
       technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Stripe", "Prisma"],
       demoUrl: "https://makanihomes.com/",
       githubUrl: "",
