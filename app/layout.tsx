@@ -1,61 +1,77 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import localFont from "next/font/local";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-
-const cairo = localFont({
-  src: [
-    {
-      path: "../public/fonts/Cairo-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Cairo-Bold.ttf",
-      weight: "700",
-      style: "bold",
-    },
-    {
-      path: "../public/fonts/Cairo-ExtraBold.ttf",
-      weight: "800",
-      style: "extrabold",
-    },
-    {
-      path: "../public/fonts/Cairo-Black.ttf",
-      weight: "900",
-      style: "black",
-    },
-    {
-      path: "../public/fonts/Cairo-SemiBold.ttf",
-      weight: "600",
-      style: "semibold",
-    },
-    {
-      path: "../public/fonts/Cairo-Medium.ttf",
-      weight: "600",
-      style: "medium",
-    },
-    {
-      path: "../public/fonts/Cairo-Light.ttf",
-      weight: "300",
-      style: "light",
-    },
-    {
-      path: "../public/fonts/Cairo-ExtraLight.ttf",
-      weight: "200",
-      style: "extralight",
-    },
-  ],
-  variable: "--font-cairo",
-});
+import { Providers } from "@/components/providers";
+import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
+import { FloatingActions } from "@/components/ui/FloatingActions";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Lovable Nextjs",
-  description: "Next.js project generated from lovable",
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
+  title: {
+    default: siteConfig.title,
+    template: "%s",
+  },
+  description: siteConfig.description,
+  authors: [{ name: siteConfig.author, url: siteConfig.url }],
+  creator: siteConfig.author,
+  publisher: siteConfig.author,
+  keywords: [
+    "AI product builder",
+    "SaaS MVP development",
+    "MVP developer",
+    "AI engineering",
+    "technical advisory",
+    "full stack engineer",
+    "startup technical partner",
+  ],
+  icons: {
+    icon: [
+      {
+        url: siteConfig.icon,
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: siteConfig.icon,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} - AI and SaaS MVP Builder`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -64,15 +80,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased ${cairo.variable}`}>
-        <TooltipProvider>
-          <Navbar />
-          <Toaster />
-          <Sonner />
-          {children}
-          <Footer />
-        </TooltipProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`antialiased`}>
+        <Providers>
+          <div className="min-h-screen flex flex-col relative">
+            <AnimatedBackground />
+            <Navbar />
+            <main className="flex-1 pt-16">{children}</main>
+            <Footer />
+            <FloatingActions />
+          </div>
+        </Providers>
       </body>
     </html>
   );
