@@ -9,29 +9,29 @@ const testimonials = [
   {
     quote:
       "Bahaa told me not to build something before we had even talked about the product. That conversation saved me from wasting three months.",
-    author: "[Founder Name]",
-    role: "Founder, [Industry] Startup",
+    author: "Lucien Faber",
+    role: "CEO & Founder, Lucien AI",
     rating: 5,
   },
   {
     quote:
       "I had been burned by two developers before working with Bahaa. He scoped the project in a way I actually understood and shipped on the timeline he promised.",
-    author: "[Founder Name]",
-    role: "Non-Technical Founder",
+    author: "Nourin Abu Baker",
+    role: "CEO & Co-Founder, Makani Homes",
     rating: 5,
   },
   {
     quote:
       "What I did not expect was how much he thought about the business, not just the code. Every decision came with a reason that made sense for where we were.",
-    author: "[Founder Name]",
-    role: "CEO, SaaS Startup",
+    author: "Abdulallah",
+    role: "Founder, Streamline",
     rating: 5,
   },
   {
     quote:
       "He built the AI layer I had been told was too complex for an MVP. It was not. It was in production in 5 weeks.",
-    author: "[Founder Name]",
-    role: "Founder, AI Product",
+    author: "Lucien Faber",
+    role: "CEO & Founder, Lucien AI",
     rating: 5,
   },
 ];
@@ -119,7 +119,7 @@ function FlipCard({
           {testimonial.rating}/5 Rating
         </p>
         <p className="text-center text-sm text-muted-foreground mt-2">
-          Replace with real client testimonial before launch
+          Founder feedback from a shipped product engagement
         </p>
       </motion.div>
     </motion.div>

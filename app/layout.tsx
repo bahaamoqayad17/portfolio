@@ -6,6 +6,8 @@ import { FloatingActions } from "@/components/ui/FloatingActions";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { siteConfig } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -82,6 +84,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiased`}>
+        <SpeedInsights />
+        <Analytics />
         <Providers>
           <div className="min-h-screen flex flex-col relative">
             <AnimatedBackground />
