@@ -12,23 +12,21 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
+  category: "Technology",
   title: {
     default: siteConfig.title,
     template: "%s",
   },
   description: siteConfig.description,
-  authors: [{ name: siteConfig.author, url: siteConfig.url }],
+  authors: [
+    {
+      name: siteConfig.author,
+      url: siteConfig.url,
+    },
+  ],
   creator: siteConfig.author,
   publisher: siteConfig.author,
-  keywords: [
-    "AI product builder",
-    "SaaS MVP development",
-    "MVP developer",
-    "AI engineering",
-    "technical advisory",
-    "full stack engineer",
-    "startup technical partner",
-  ],
+  keywords: siteConfig.seoKeywords,
   icons: {
     icon: [
       {
@@ -44,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/",
+    url: siteConfig.url,
     siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,
@@ -53,12 +51,13 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - AI and SaaS MVP Builder`,
+        alt: `${siteConfig.name} | AI Product Builder | ${siteConfig.arabicName}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    creator: "@bahaamoqayad17",
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
@@ -66,6 +65,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -82,10 +82,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`antialiased`}>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <body className="antialiased">
         <SpeedInsights />
         <Analytics />
+
         <Providers>
           <div className="min-h-screen flex flex-col relative">
             <AnimatedBackground />

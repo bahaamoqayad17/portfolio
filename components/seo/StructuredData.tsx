@@ -28,6 +28,7 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
     "@type": "Person",
     "@id": absoluteUrl("/#person"),
     name: siteConfig.name,
+    alternateName: siteConfig.arabicName,
     url: siteConfig.url,
     email: siteConfig.email,
     sameAs: [
@@ -51,6 +52,11 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
       "Node.js",
       "TypeScript",
       "Startup Validation",
+      "تطوير MVP",
+      "تطوير SaaS",
+      "تطوير منتجات الذكاء الاصطناعي",
+      "استشارات تقنية للشركات الناشئة",
+      "شريك تقني للمؤسسين",
     ],
   };
 
@@ -58,6 +64,7 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
     "@type": "ProfessionalService",
     "@id": absoluteUrl("/#professional-service"),
     name: `${siteConfig.name} - AI & SaaS MVP Development`,
+    alternateName: `${siteConfig.arabicName} - تطوير MVP و SaaS`,
     url: siteConfig.url,
     logo: absoluteUrl(siteConfig.icon),
     image: absoluteUrl(siteConfig.ogImage),
@@ -77,6 +84,7 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
           itemOffered: {
             "@type": "Service",
             name: "MVP Build",
+            alternateName: "تطوير MVP",
             description:
               "Product scoping, full-stack development, deployment, and launch support for validated SaaS ideas.",
           },
@@ -86,6 +94,7 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
           itemOffered: {
             "@type": "Service",
             name: "AI Engineering",
+            alternateName: "هندسة منتجات الذكاء الاصطناعي",
             description:
               "Production AI systems, LLM integrations, RAG pipelines, and AI-native product architecture.",
           },
@@ -95,6 +104,7 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
           itemOffered: {
             "@type": "Service",
             name: "Technical Advisory",
+            alternateName: "استشارات تقنية للشركات الناشئة",
             description:
               "Architecture review, tech stack guidance, developer evaluation, and strategic technical support for founders.",
           },
@@ -107,10 +117,12 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
     "@type": "WebSite",
     "@id": absoluteUrl("/#website"),
     name: siteConfig.name,
+    alternateName: siteConfig.arabicName,
     url: siteConfig.url,
     publisher: {
       "@id": absoluteUrl("/#person"),
     },
+    inLanguage: "en-US",
   };
 
   const webPageSchema = {
@@ -119,6 +131,7 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
     url: absoluteUrl(path),
     name: route.title,
     description: route.description,
+    inLanguage: "en-US",
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: absoluteUrl(siteConfig.ogImage),
