@@ -108,6 +108,7 @@ export function getRoute(path: SitePath) {
 
 export function createPageMetadata(path: SitePath): Metadata {
   const route = getRoute(path);
+  const shouldIndex = route.path === "/";
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -140,6 +141,17 @@ export function createPageMetadata(path: SitePath): Metadata {
       title: route.title,
       description: route.description,
       images: [siteConfig.ogImage],
+    },
+    robots: {
+      index: shouldIndex,
+      follow: true,
+      googleBot: {
+        index: shouldIndex,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
   };
 }
