@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, routes } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: absoluteUrl("/"),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-  ];
+  const lastModified = new Date();
+
+  return routes.map((route) => ({
+    url: absoluteUrl(route.path),
+    lastModified,
+    changeFrequency: "weekly",
+    priority: route.path === "/" ? 1 : 0.8,
+  }));
 }

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { siteConfig } from "@/lib/seo";
 
 export function AnimatedLogo() {
   return (
@@ -77,15 +78,17 @@ export function AnimatedLogo() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          Bahaa El Moqayad
+          {siteConfig.name}
         </motion.span>
         <motion.span
-          className="text-[10px] text-muted-foreground tracking-widest uppercase"
+          className="text-[10px] text-muted-foreground"
+          lang="ar"
+          dir="rtl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          Founder & Engineer
+          {siteConfig.arabicName}
         </motion.span>
       </div>
     </Link>

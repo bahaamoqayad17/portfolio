@@ -6,6 +6,7 @@ import { HeroScene } from "@/components/3d/SceneIslands";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { siteConfig } from "@/lib/seo";
 
 const stats = [
   { value: 7, suffix: "+", label: "Years Building" },
@@ -49,9 +50,22 @@ export function Hero() {
               <Sparkles className="h-4 w-4 text-primary" />
             </motion.div>
             <span className="text-sm font-medium text-primary">
-              AI Product Builder · Gaza
+              AI Product Builder - Gaza
             </span>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="mb-4 text-sm sm:text-base text-muted-foreground"
+          >
+            <span>{siteConfig.name}</span>
+            <span aria-hidden="true"> / </span>
+            <span lang="ar" dir="rtl">
+              {siteConfig.arabicName}
+            </span>
+          </motion.p>
 
           <div className="overflow-hidden">
             <TextReveal delay={0.1}>

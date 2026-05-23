@@ -37,7 +37,14 @@ export function Footer() {
           <div className="md:col-span-2">
             <Link href="/" className="inline-block">
               <span className="text-2xl font-bold gradient-text">
-                Bahaa El Moqayad
+                {siteConfig.name}
+              </span>
+              <span
+                className="mt-1 block text-sm text-muted-foreground"
+                lang="ar"
+                dir="rtl"
+              >
+                {siteConfig.arabicName}
               </span>
             </Link>
             <p className="mt-4 text-muted-foreground max-w-sm">

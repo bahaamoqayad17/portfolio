@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const siteConfig = {
   name: "Bahaa El Moqayad",
   arabicName: "بهاء المقيد",
-  title: "Bahaa El Moqayad | AI & SaaS MVP Builder",
+  title: "Bahaa El Moqayad | بهاء المقيد | AI & SaaS MVP Builder",
   description:
     "AI Product Builder helping founders ship AI and SaaS MVPs from validated idea to working product in 3 to 6 weeks.",
 
@@ -50,7 +50,7 @@ export const siteConfig = {
     "شريك تقني للمؤسسين",
   ],
 
-  url: "https://bahaamoqayad17.com",
+  url: "https://www.bahaamoqayad17.com",
   icon: "/site-icon.svg",
   ogImage: "/opengraph-image",
   email: "bahaamoqayad17@gmail.com",
@@ -108,8 +108,6 @@ export function getRoute(path: SitePath) {
 
 export function createPageMetadata(path: SitePath): Metadata {
   const route = getRoute(path);
-  const shouldIndex = route.path === "/";
-
   return {
     metadataBase: new URL(siteConfig.url),
     title: route.title,
@@ -143,10 +141,10 @@ export function createPageMetadata(path: SitePath): Metadata {
       images: [siteConfig.ogImage],
     },
     robots: {
-      index: shouldIndex,
+      index: true,
       follow: true,
       googleBot: {
-        index: shouldIndex,
+        index: true,
         follow: true,
         "max-image-preview": "large",
         "max-snippet": -1,

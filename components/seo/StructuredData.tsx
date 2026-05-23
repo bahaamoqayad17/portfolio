@@ -37,6 +37,7 @@ export function StructuredData({ page = "home" }: StructuredDataProps) {
       siteConfig.social.instagram,
     ],
     jobTitle: "AI Product Builder",
+    knowsLanguage: ["English", "Arabic"],
     worksFor: {
       "@id": absoluteUrl("/#professional-service"),
     },
